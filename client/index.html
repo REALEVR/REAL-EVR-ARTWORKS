@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Artscape - Virtual Art Galleries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: 59 130 246;
+        --accent: 74 144 226;
+      }
+      .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+      .font-sans {
+        font-family: 'Inter', sans-serif;
+      }
+      .font-medium {
+        font-family: 'Montserrat', sans-serif;
+      }
+      .masonry-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-gap: 20px;
+        grid-auto-flow: dense;
+      }
+      @media (min-width: 768px) {
+        .masonry-grid {
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        }
+      }
+      .artwork-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .artwork-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+  </body>
+</html>
