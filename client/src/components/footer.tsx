@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-serif text-xl font-bold mb-4">Artscape</h3>
+            <h3 className="font-serif text-xl font-bold mb-4">REALEVR ART WORKS</h3>
             <p className="text-gray-300 text-sm">
               The premier platform for artists to create and share virtual gallery exhibitions with audiences worldwide.
             </p>
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
         
         <div className="mt-12 pt-8 border-t border-gray-700 text-sm text-gray-400 flex flex-col md:flex-row justify-between">
-          <p>&copy; {new Date().getFullYear()} Artscape. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} REALEVR ART WORKS. All rights reserved.</p>
           <div className="mt-4 md:mt-0 space-x-6">
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
