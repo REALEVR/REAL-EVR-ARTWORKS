@@ -6,7 +6,10 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-serif text-xl font-bold mb-4">REALEVR ART WORKS</h3>
+            <h3 className="mb-4 flex items-center">
+              <span className="font-tech text-xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400">REALEVR</span>
+              <span className="font-medium text-xl ml-2 tracking-wide text-white">ART WORKS</span>
+            </h3>
             <p className="text-gray-300 text-sm">
               The premier platform for artists to create and share virtual gallery exhibitions with audiences worldwide.
             </p>

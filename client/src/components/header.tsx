@@ -38,7 +38,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          <span className="font-serif text-2xl font-bold tracking-tight">REALEVR ART WORKS</span>
+          <span className="font-tech text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">REALEVR</span>
+          <span className="font-medium text-2xl ml-2 tracking-wide">ART WORKS</span>
         </Link>
         
         <div className="hidden md:flex items-center space-x-8">
