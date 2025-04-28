@@ -1,8 +1,11 @@
 import { 
   type User, type InsertUser, 
   type Gallery, type InsertGallery,
-  type Artwork, type InsertArtwork
+  type Artwork, type InsertArtwork,
+  users, galleries, artworks
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -25,109 +28,103 @@ export interface IStorage {
   getUserArtworks(userId: number): Promise<Artwork[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private galleries: Map<number, Gallery>;
-  private artworks: Map<number, Artwork>;
-  private userIdCounter: number;
-  private galleryIdCounter: number;
-  private artworkIdCounter: number;
-
-  constructor() {
-    this.users = new Map();
-    this.galleries = new Map();
-    this.artworks = new Map();
-    this.userIdCounter = 1;
-    this.galleryIdCounter = 1;
-    this.artworkIdCounter = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   // User operations
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username.toLowerCase() === username.toLowerCase(),
-    );
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.username, username));
+    return user;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.userIdCounter++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   // Gallery operations
   async createGallery(insertGallery: InsertGallery): Promise<Gallery> {
-    const id = this.galleryIdCounter++;
-    const gallery: Gallery = { 
-      ...insertGallery, 
-      id,
-      createdAt: new Date()
-    };
-    this.galleries.set(id, gallery);
+    const [gallery] = await db
+      .insert(galleries)
+      .values(insertGallery)
+      .returning();
     return gallery;
   }
 
   async getGallery(id: number): Promise<Gallery | undefined> {
-    return this.galleries.get(id);
+    const [gallery] = await db
+      .select()
+      .from(galleries)
+      .where(eq(galleries.id, id));
+    return gallery;
   }
 
   async getUserGalleries(userId: number): Promise<Gallery[]> {
-    return Array.from(this.galleries.values()).filter(
-      (gallery) => gallery.userId === userId
-    );
+    return db
+      .select()
+      .from(galleries)
+      .where(eq(galleries.userId, userId));
   }
 
   async getAllGalleries(): Promise<Gallery[]> {
-    return Array.from(this.galleries.values());
+    return db.select().from(galleries);
   }
 
   async getFeaturedGalleries(): Promise<Gallery[]> {
-    return Array.from(this.galleries.values()).filter(
-      (gallery) => gallery.featured
-    );
+    return db
+      .select()
+      .from(galleries)
+      .where(eq(galleries.featured, true));
   }
 
   async updateGallery(id: number, galleryUpdate: Partial<InsertGallery>): Promise<Gallery | undefined> {
-    const gallery = this.galleries.get(id);
-    if (!gallery) return undefined;
-    
-    const updatedGallery = { ...gallery, ...galleryUpdate };
-    this.galleries.set(id, updatedGallery);
-    return updatedGallery;
+    const [gallery] = await db
+      .update(galleries)
+      .set(galleryUpdate)
+      .where(eq(galleries.id, id))
+      .returning();
+    return gallery;
   }
 
   // Artwork operations
   async createArtwork(insertArtwork: InsertArtwork): Promise<Artwork> {
-    const id = this.artworkIdCounter++;
-    const artwork: Artwork = { 
-      ...insertArtwork, 
-      id,
-      createdAt: new Date()
-    };
-    this.artworks.set(id, artwork);
+    const [artwork] = await db
+      .insert(artworks)
+      .values(insertArtwork)
+      .returning();
     return artwork;
   }
 
   async getArtwork(id: number): Promise<Artwork | undefined> {
-    return this.artworks.get(id);
+    const [artwork] = await db
+      .select()
+      .from(artworks)
+      .where(eq(artworks.id, id));
+    return artwork;
   }
 
   async getGalleryArtworks(galleryId: number): Promise<Artwork[]> {
-    return Array.from(this.artworks.values()).filter(
-      (artwork) => artwork.galleryId === galleryId
-    );
+    return db
+      .select()
+      .from(artworks)
+      .where(eq(artworks.galleryId, galleryId));
   }
 
   async getUserArtworks(userId: number): Promise<Artwork[]> {
-    return Array.from(this.artworks.values()).filter(
-      (artwork) => artwork.userId === userId
-    );
+    return db
+      .select()
+      .from(artworks)
+      .where(eq(artworks.userId, userId));
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
