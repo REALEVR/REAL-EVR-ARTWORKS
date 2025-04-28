@@ -12,6 +12,7 @@ import GalleryView from "@/pages/gallery/view";
 import GalleryCreate from "@/pages/gallery/create";
 import Login from "@/pages/auth/login";
 import Register from "@/pages/auth/register";
+import Exhibitions from "@/pages/exhibitions";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
@@ -31,6 +32,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/explore" component={Explore} />
+      <Route path="/exhibitions" component={Exhibitions} />
       <Route path="/artist/:id" component={ArtistProfile} />
       <Route path="/gallery/:id" component={GalleryView} />
       <Route path="/create-gallery" component={GalleryCreate} />
