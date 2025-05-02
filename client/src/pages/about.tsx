@@ -10,7 +10,7 @@ export default function About() {
       {/* Hero Section */}
       <section className="relative h-[60vh] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black z-10"></div>
-        <div className="absolute inset-0 bg-[url('/images/gallery-bg.jpg')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 bg-[url('/images/gallery-bg.svg')] bg-cover bg-center"></div>
         <div className="container mx-auto px-4 h-full flex items-center relative z-20">
           <div className="max-w-3xl">
             <img src={logoImg} alt="REALEVR ART WORKS" className="h-16 mb-6" />
@@ -47,9 +47,9 @@ export default function About() {
               className="rounded-xl overflow-hidden shadow-2xl"
             >
               <img 
-                src="/images/virtual-gallery.jpg" 
+                src="/images/virtual-gallery.svg" 
                 alt="Virtual Art Gallery" 
-                className="w-full h-auto"
+                className="w-full h-auto bg-gray-900"
               />
             </motion.div>
           </div>
@@ -88,7 +88,7 @@ export default function About() {
 
       {/* Parallax Quote */}
       <Parallax className="py-32 text-center relative overflow-hidden bg-black">
-        <div className="absolute inset-0 opacity-30 bg-[url('/images/art-collage.jpg')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 opacity-30 bg-[url('/images/art-collage.svg')] bg-cover bg-center"></div>
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-2xl md:text-4xl font-serif italic mb-6 max-w-4xl mx-auto leading-relaxed">
             "At REALEVR ARTWORKS, we believe that art should be seen, felt, and explored, no matter where you are.
@@ -108,9 +108,9 @@ export default function About() {
               className="rounded-xl overflow-hidden shadow-2xl order-2 md:order-1"
             >
               <img 
-                src="/images/artist-creating.jpg" 
+                src="/images/artist-creating.svg" 
                 alt="Artist Creating" 
-                className="w-full h-auto"
+                className="w-full h-auto bg-gray-900"
               />
             </motion.div>
             <div className="order-1 md:order-2">
