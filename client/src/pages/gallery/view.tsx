@@ -2,8 +2,9 @@ import { useParams } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, Share2 } from "lucide-react";
+import { ArrowLeft, ExternalLink, Share2, Lock } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import ProtectedContent from "@/components/protected-content";
 
 export default function GalleryView() {
   const { id } = useParams();
@@ -131,27 +132,61 @@ export default function GalleryView() {
         <div className="mb-8">
           <h2 className="font-serif text-2xl font-semibold mb-6">Gallery Artworks</h2>
           
-          {artworks?.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {artworks.map((artwork: any) => (
-                <div key={artwork.id} className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all">
-                  <img 
-                    src={artwork.imageUrl} 
-                    alt={artwork.title} 
-                    className="w-full h-48 object-cover" 
-                  />
-                  <div className="p-3">
-                    <h3 className="font-medium text-lg">{artwork.title}</h3>
-                    <p className="text-sm text-gray-500">{artwork.medium}</p>
+          <ProtectedContent
+            fallback={
+              <div className="relative">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 blur-sm opacity-70">
+                  {artworks?.length > 0 ? artworks.slice(0, 4).map((artwork: any) => (
+                    <div key={artwork.id} className="rounded-lg overflow-hidden shadow-sm">
+                      <img 
+                        src={artwork.imageUrl} 
+                        alt={artwork.title} 
+                        className="w-full h-48 object-cover" 
+                      />
+                      <div className="p-3">
+                        <h3 className="font-medium text-lg">{artwork.title}</h3>
+                        <p className="text-sm text-gray-500">{artwork.medium}</p>
+                      </div>
+                    </div>
+                  )) : (
+                    <div className="col-span-full text-center py-12 text-gray-500 bg-gray-50 rounded-lg">
+                      No artworks available in this gallery
+                    </div>
+                  )}
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-black/70 text-white p-6 rounded-lg text-center max-w-md backdrop-blur-sm">
+                    <Lock className="h-10 w-10 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold mb-2">Premium Artwork</h3>
+                    <p className="mb-4">Sign in to view all artworks in this gallery and unlock the full experience.</p>
+                    <Button className="w-full">Sign in to Continue</Button>
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 text-gray-500 bg-gray-50 rounded-lg">
-              No artworks available in this gallery
-            </div>
-          )}
+              </div>
+            }
+          >
+            {artworks?.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {artworks.map((artwork: any) => (
+                  <div key={artwork.id} className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all">
+                    <img 
+                      src={artwork.imageUrl} 
+                      alt={artwork.title} 
+                      className="w-full h-48 object-cover" 
+                    />
+                    <div className="p-3">
+                      <h3 className="font-medium text-lg">{artwork.title}</h3>
+                      <p className="text-sm text-gray-500">{artwork.medium}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 text-gray-500 bg-gray-50 rounded-lg">
+                No artworks available in this gallery
+              </div>
+            )}
+          </ProtectedContent>
         </div>
         
         {artist && (
