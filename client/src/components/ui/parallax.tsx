@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 interface ParallaxProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -7,68 +7,43 @@ interface ParallaxProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Parallax({ 
-  children, 
-  speed = 0.5, 
+  speed = 0.1,
   className,
-  ...props 
+  children,
+  ...props
 }: ParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [elementPosition, setElementPosition] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(0);
   
   useEffect(() => {
-    const element = ref.current;
-    
-    if (!element) return;
-    
     const handleScroll = () => {
-      setScrollPosition(window.scrollY);
+      const element = ref.current;
+      if (!element) return;
+      
+      const scrollTop = window.scrollY;
+      const elementTop = element.getBoundingClientRect().top + scrollTop;
+      const viewportHeight = window.innerHeight;
+      
+      // Only apply parallax effect when the element is in view
+      if (
+        elementTop < scrollTop + viewportHeight &&
+        elementTop + element.offsetHeight > scrollTop
+      ) {
+        const offset = (scrollTop - elementTop) * speed;
+        element.style.transform = `translateY(${offset}px)`;
+      }
     };
     
-    const handleResize = () => {
-      setViewportHeight(window.innerHeight);
-      const rect = element.getBoundingClientRect();
-      setElementPosition(rect.top + window.scrollY);
-    };
-    
-    // Initialize
-    handleResize();
-    
-    // Add event listeners
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
+    handleScroll(); // Initialize on mount
     
-    // Cleanup
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
     };
-  }, []);
-  
-  // Calculate the translateY value for the parallax effect
-  const translateY = (() => {
-    if (scrollPosition + viewportHeight < elementPosition) return 0;
-    if (scrollPosition > elementPosition + (ref.current?.offsetHeight || 0)) return 0;
-    
-    const relativePosition = scrollPosition + viewportHeight - elementPosition;
-    return relativePosition * speed * -1;
-  })();
+  }, [speed]);
   
   return (
-    <div 
-      ref={ref}
-      className={cn("relative overflow-hidden", className)}
-      {...props}
-    >
-      <div 
-        style={{ 
-          transform: `translateY(${translateY}px)`,
-          transition: "transform 0.1s linear"
-        }}
-      >
-        {children}
-      </div>
+    <div ref={ref} className={cn(className)} {...props}>
+      {children}
     </div>
   );
 }

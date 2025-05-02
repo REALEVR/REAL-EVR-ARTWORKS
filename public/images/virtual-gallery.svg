@@ -1,57 +1,88 @@
-<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="100%" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="floorGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#222;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#333;stop-opacity:1" />
+    <linearGradient id="floor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d3436" />
+      <stop offset="100%" stop-color="#636e72" />
     </linearGradient>
-    <linearGradient id="wallGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#111;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    <linearGradient id="wall-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dfe6e9" />
+      <stop offset="100%" stop-color="#b2bec3" />
     </linearGradient>
+    <linearGradient id="ceiling-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#dfe6e9" />
+      <stop offset="100%" stop-color="#b2bec3" />
+    </linearGradient>
+    <linearGradient id="artwork1-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c5ce7" />
+      <stop offset="100%" stop-color="#a29bfe" />
+    </linearGradient>
+    <linearGradient id="artwork2-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0984e3" />
+      <stop offset="100%" stop-color="#74b9ff" />
+    </linearGradient>
+    <linearGradient id="artwork3-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d63031" />
+      <stop offset="100%" stop-color="#ff7675" />
+    </linearGradient>
+    <linearGradient id="artwork4-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00b894" />
+      <stop offset="100%" stop-color="#55efc4" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="10" dy="10" stdDeviation="15" flood-opacity="0.3" />
+    </filter>
   </defs>
   
   <!-- Background -->
-  <rect width="100%" height="100%" fill="#0a0a0a"/>
+  <rect width="100%" height="100%" fill="#111" />
   
-  <!-- Floor -->
-  <polygon points="100,450 700,450 600,600 200,600" fill="url(#floorGradient)" />
+  <!-- Gallery Floor -->
+  <polygon points="200,800 1000,800 900,500 300,500" fill="url(#floor-gradient)" />
   
   <!-- Left Wall -->
-  <polygon points="100,450 100,150 400,50 400,350 100,450" fill="url(#wallGradient)" />
+  <polygon points="200,800 300,500 300,150 200,100" fill="#2d3436" />
   
   <!-- Right Wall -->
-  <polygon points="400,350 400,50 700,150 700,450 400,350" fill="url(#wallGradient)" />
+  <polygon points="1000,800 900,500 900,150 1000,100" fill="#2d3436" />
   
-  <!-- Artworks on Left Wall -->
-  <rect x="150" y="200" width="100" height="80" rx="2" ry="2" fill="#d65a31" opacity="0.9" />
-  <rect x="280" y="170" width="70" height="120" rx="2" ry="2" fill="#3f88c5" opacity="0.9" />
+  <!-- Back Wall -->
+  <polygon points="300,500 900,500 900,150 300,150" fill="url(#wall-gradient)" />
   
-  <!-- Artworks on Right Wall -->
-  <rect x="450" y="180" width="90" height="70" rx="2" ry="2" fill="#44bba4" opacity="0.9" />
-  <rect x="570" y="190" width="80" height="100" rx="2" ry="2" fill="#e94f37" opacity="0.9" />
+  <!-- Ceiling -->
+  <polygon points="200,100 300,150 900,150 1000,100" fill="url(#ceiling-gradient)" />
   
-  <!-- Gallery Spotlights -->
-  <circle cx="150" cy="150" r="10" fill="#fff" opacity="0.7">
-    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="280" cy="150" r="10" fill="#fff" opacity="0.7">
-    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="4s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="450" cy="150" r="10" fill="#fff" opacity="0.7">
-    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3.5s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="570" cy="150" r="10" fill="#fff" opacity="0.7">
-    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="2.5s" repeatCount="indefinite" />
-  </circle>
+  <!-- Artwork 1 - Left -->
+  <rect x="350" y="200" width="150" height="200" fill="url(#artwork1-gradient)" filter="url(#shadow)" />
+  <rect x="350" y="200" width="150" height="200" stroke="#fff" stroke-width="5" fill="none" />
   
-  <!-- Light Beams -->
-  <polygon points="150,150 130,240 170,240" fill="#fff" opacity="0.2" />
-  <polygon points="280,150 260,240 300,240" fill="#fff" opacity="0.2" />
-  <polygon points="450,150 430,240 470,240" fill="#fff" opacity="0.2" />
-  <polygon points="570,150 550,240 590,240" fill="#fff" opacity="0.2" />
+  <!-- Artwork 2 - Middle Left -->
+  <rect x="550" y="200" width="100" height="200" fill="url(#artwork2-gradient)" filter="url(#shadow)" />
+  <rect x="550" y="200" width="100" height="200" stroke="#fff" stroke-width="5" fill="none" />
   
-  <!-- Visitor Silhouette -->
-  <ellipse cx="400" cy="500" rx="20" ry="5" fill="#000" opacity="0.5" />
-  <path d="M390 500 L390 460 A10 15 0 0 1 410 460 L410 500" fill="#222" />
-  <circle cx="400" cy="450" r="15" fill="#222" />
+  <!-- Artwork 3 - Middle Right -->
+  <rect x="700" y="200" width="80" height="200" fill="url(#artwork3-gradient)" filter="url(#shadow)" />
+  <rect x="700" y="200" width="80" height="200" stroke="#fff" stroke-width="5" fill="none" />
+  
+  <!-- Artwork 4 - Right -->
+  <rect x="830" y="200" width="120" height="200" fill="url(#artwork4-gradient)" filter="url(#shadow)" />
+  <rect x="830" y="200" width="120" height="200" stroke="#fff" stroke-width="5" fill="none" />
+  
+  <!-- Spotlights -->
+  <ellipse cx="425" cy="170" rx="50" ry="20" fill="#fdcb6e" opacity="0.3" />
+  <ellipse cx="600" cy="170" rx="40" ry="15" fill="#fdcb6e" opacity="0.3" />
+  <ellipse cx="740" cy="170" rx="30" ry="10" fill="#fdcb6e" opacity="0.3" />
+  <ellipse cx="890" cy="170" rx="45" ry="18" fill="#fdcb6e" opacity="0.3" />
+  
+  <!-- Spotlight Cones -->
+  <path d="M425,150 L350,200 L500,200 Z" fill="#fdcb6e" opacity="0.1" />
+  <path d="M600,150 L550,200 L650,200 Z" fill="#fdcb6e" opacity="0.1" />
+  <path d="M740,150 L700,200 L780,200 Z" fill="#fdcb6e" opacity="0.1" />
+  <path d="M890,150 L830,200 L950,200 Z" fill="#fdcb6e" opacity="0.1" />
+  
+  <!-- Gallery Rails -->
+  <line x1="300" y1="450" x2="900" y2="450" stroke="#636e72" stroke-width="5" />
+  
+  <!-- Foreground Elements - Silhouettes -->
+  <path d="M500,700 C500,650 550,650 550,700 L548,800 L502,800 Z" fill="#000" opacity="0.7" /> <!-- Person 1 -->
+  <path d="M700,720 C700,680 730,680 730,720 L728,800 L702,800 Z" fill="#000" opacity="0.7" /> <!-- Person 2 -->
 </svg>

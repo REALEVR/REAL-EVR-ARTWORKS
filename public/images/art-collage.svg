@@ -1,54 +1,110 @@
-<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="100%" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#111;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#222;stop-opacity:1" />
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c5ce7" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#fd79a8" stop-opacity="0.8" />
     </linearGradient>
-    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#fff" stroke-width="0.5" stroke-opacity="0.05"/>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0984e3" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#00cec9" stop-opacity="0.8" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fdcb6e" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#e17055" stop-opacity="0.8" />
+    </linearGradient>
+    <pattern id="pattern1" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#6c5ce7" fill-opacity="0.3" />
+    </pattern>
+    <pattern id="pattern2" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(60)">
+      <circle cx="15" cy="15" r="5" fill="#fd79a8" fill-opacity="0.3" />
     </pattern>
   </defs>
   
-  <!-- Background -->
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <rect width="100%" height="100%" fill="url(#grid)"/>
+  <!-- Background with gradient -->
+  <rect width="100%" height="100%" fill="#111" />
   
-  <!-- Abstract Art Grid -->
+  <!-- Abstract art elements - grid of different art pieces -->
   
   <!-- Row 1 -->
-  <rect x="100" y="100" width="150" height="150" fill="#d65a31" opacity="0.8" rx="5" ry="5"/>
-  <circle cx="350" cy="175" r="75" fill="#3f88c5" opacity="0.8"/>
-  <polygon points="500,100 600,250 400,250" fill="#44bba4" opacity="0.8"/>
-  <rect x="650" y="100" width="150" height="150" fill="#e94f37" opacity="0.8" rx="5" ry="5"/>
-  <circle cx="900" cy="175" r="75" fill="#7768ae" opacity="0.8"/>
-  <rect x="1000" y="100" width="150" height="150" fill="#ff9800" opacity="0.8"/>
+  <rect x="50" y="50" width="200" height="200" fill="url(#grad1)" />
+  <circle cx="350" cy="150" r="100" fill="url(#grad2)" />
+  <polygon points="500,50 700,50 600,250" fill="url(#grad3)" />
+  <rect x="750" y="50" width="200" height="200" fill="url(#pattern1)" />
+  <rect x="1000" y="100" width="150" height="100" rx="50" ry="50" fill="#a29bfe" opacity="0.7" />
   
   <!-- Row 2 -->
-  <circle cx="175" cy="325" r="75" fill="#7768ae" opacity="0.8"/>
-  <rect x="250" y="250" width="150" height="150" fill="#ff9800" opacity="0.8" rx="5" ry="5"/>
-  <rect x="450" y="250" width="150" height="150" fill="#d65a31" opacity="0.8"/>
-  <polygon points="700,250 800,400 600,400" fill="#3f88c5" opacity="0.8"/>
-  <rect x="850" y="250" width="150" height="150" fill="#44bba4" opacity="0.8" rx="5" ry="5"/>
-  <circle cx="1075" cy="325" r="75" fill="#e94f37" opacity="0.8"/>
+  <polygon points="50,300 250,300 150,500" fill="#74b9ff" opacity="0.7" />
+  <rect x="300" y="300" width="150" height="150" rx="20" ry="20" fill="#55efc4" opacity="0.7" />
+  <circle cx="550" cy="375" r="75" fill="url(#pattern2)" />
+  <rect x="650" y="300" width="300" height="150" fill="#ffeaa7" opacity="0.6" />
+  <polygon points="1000,300 1150,300 1075,450" fill="#fab1a0" opacity="0.7" />
   
   <!-- Row 3 -->
-  <rect x="100" y="400" width="150" height="150" fill="#44bba4" opacity="0.8"/>
-  <polygon points="350,400 450,550 250,550" fill="#e94f37" opacity="0.8"/>
-  <circle cx="550" cy="475" r="75" fill="#7768ae" opacity="0.8"/>
-  <rect x="650" y="400" width="150" height="150" fill="#ff9800" opacity="0.8" rx="5" ry="5"/>
-  <rect x="850" y="400" width="150" height="150" fill="#d65a31" opacity="0.8"/>
-  <polygon points="1075,400 1150,550 1000,550" fill="#3f88c5" opacity="0.8"/>
+  <circle cx="125" cy="600" r="75" fill="#d63031" opacity="0.6" />
+  <rect x="250" y="550" width="150" height="150" fill="#e84393" opacity="0.5" />
+  <path d="M450,550 C500,500 550,600 600,550 S650,650 700,600" stroke="#0984e3" stroke-width="10" fill="none" />
+  <rect x="750" y="550" width="150" height="150" fill="#00cec9" opacity="0.5" />
+  <polygon points="950,550 1100,550 1025,700" fill="#6c5ce7" opacity="0.5" />
   
-  <!-- Row 4 -->
-  <polygon points="175,550 250,700 100,700" fill="#ff9800" opacity="0.8"/>
-  <rect x="250" y="550" width="150" height="150" fill="#3f88c5" opacity="0.8" rx="5" ry="5"/>
-  <circle cx="475" cy="625" r="75" fill="#d65a31" opacity="0.8"/>
-  <rect x="550" y="550" width="150" height="150" fill="#44bba4" opacity="0.8"/>
-  <polygon points="775,550 850,700 700,700" fill="#e94f37" opacity="0.8"/>
-  <circle cx="950" cy="625" r="75" fill="#7768ae" opacity="0.8"/>
-  <rect x="1025" y="550" width="150" height="150" fill="#ff9800" opacity="0.8" rx="5" ry="5"/>
+  <!-- Decorative lines -->
+  <line x1="0" y1="0" x2="1200" y2="800" stroke="#fff" stroke-width="2" opacity="0.3" />
+  <line x1="1200" y1="0" x2="0" y2="800" stroke="#fff" stroke-width="2" opacity="0.3" />
   
-  <!-- Overlay Elements -->
-  <text x="600" y="400" text-anchor="middle" fill="#fff" font-size="80" opacity="0.1" font-family="Arial, sans-serif" font-weight="bold">ART</text>
-  <text x="600" y="480" text-anchor="middle" fill="#fff" font-size="80" opacity="0.1" font-family="Arial, sans-serif" font-weight="bold">GALLERY</text>
+  <!-- Random smaller art elements scattered around -->
+  <circle cx="200" cy="450" r="25" fill="#ff7675" opacity="0.6" />
+  <circle cx="800" cy="250" r="30" fill="#fdcb6e" opacity="0.7" />
+  <circle cx="950" cy="500" r="20" fill="#55efc4" opacity="0.8" />
+  <circle cx="400" cy="700" r="35" fill="#fd79a8" opacity="0.5" />
+  <circle cx="600" cy="150" r="25" fill="#a29bfe" opacity="0.6" />
+  
+  <!-- Small decorative dots pattern -->
+  <g fill="#fff" opacity="0.3">
+    <circle cx="100" cy="100" r="3" />
+    <circle cx="200" cy="200" r="3" />
+    <circle cx="300" cy="100" r="3" />
+    <circle cx="400" cy="200" r="3" />
+    <circle cx="500" cy="100" r="3" />
+    <circle cx="600" cy="200" r="3" />
+    <circle cx="700" cy="100" r="3" />
+    <circle cx="800" cy="200" r="3" />
+    <circle cx="900" cy="100" r="3" />
+    <circle cx="1000" cy="200" r="3" />
+    <circle cx="1100" cy="100" r="3" />
+    
+    <circle cx="100" cy="300" r="3" />
+    <circle cx="200" cy="400" r="3" />
+    <circle cx="300" cy="300" r="3" />
+    <circle cx="400" cy="400" r="3" />
+    <circle cx="500" cy="300" r="3" />
+    <circle cx="600" cy="400" r="3" />
+    <circle cx="700" cy="300" r="3" />
+    <circle cx="800" cy="400" r="3" />
+    <circle cx="900" cy="300" r="3" />
+    <circle cx="1000" cy="400" r="3" />
+    <circle cx="1100" cy="300" r="3" />
+    
+    <circle cx="100" cy="500" r="3" />
+    <circle cx="200" cy="600" r="3" />
+    <circle cx="300" cy="500" r="3" />
+    <circle cx="400" cy="600" r="3" />
+    <circle cx="500" cy="500" r="3" />
+    <circle cx="600" cy="600" r="3" />
+    <circle cx="700" cy="500" r="3" />
+    <circle cx="800" cy="600" r="3" />
+    <circle cx="900" cy="500" r="3" />
+    <circle cx="1000" cy="600" r="3" />
+    <circle cx="1100" cy="500" r="3" />
+    
+    <circle cx="100" cy="700" r="3" />
+    <circle cx="200" cy="800" r="3" />
+    <circle cx="300" cy="700" r="3" />
+    <circle cx="400" cy="800" r="3" />
+    <circle cx="500" cy="700" r="3" />
+    <circle cx="600" cy="800" r="3" />
+    <circle cx="700" cy="700" r="3" />
+    <circle cx="800" cy="800" r="3" />
+    <circle cx="900" cy="700" r="3" />
+    <circle cx="1000" cy="800" r="3" />
+    <circle cx="1100" cy="700" r="3" />
+  </g>
 </svg>
