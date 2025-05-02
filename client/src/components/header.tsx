@@ -102,7 +102,7 @@ export default function Header() {
               <Button asChild className="md:bg-accent md:text-white">
                 <Link href="/login">Sign In</Link>
               </Button>
-              <Button asChild variant="outline" className="hidden md:inline-flex">
+              <Button asChild variant="outline" className="hidden md:inline-flex text-white border-white hover:bg-white/10">
                 <Link href="/register">Create Gallery</Link>
               </Button>
             </>
@@ -110,7 +110,7 @@ export default function Header() {
           
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button variant="ghost" size="icon" className="md:hidden text-white hover:bg-white/10">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
