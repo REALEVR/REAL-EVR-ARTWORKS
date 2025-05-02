@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 import { useState, createContext, useContext, useEffect } from "react";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
@@ -34,24 +35,71 @@ function Router() {
   const { user } = useContext(UserContext);
   const { showAuthPrompt } = useAuthPrompt();
   
-  // Protect specific routes that require authentication
+  // Component for routes that require authentication but still allow viewing non-protected content
   const ProtectedRoute = ({ component: Component, path, ...rest }: { component: React.ComponentType, path: string, [key: string]: any }) => {
     return (
       <Route 
         path={path}
         component={(props) => {
           const [showPrompt, setShowPrompt] = useState(false);
+          const [showFallback, setShowFallback] = useState(false);
           
-          // If user is not logged in, show auth prompt with this route as redirect target
+          // Show auth prompt with this route as redirect target when user first visits and isn't logged in
           useEffect(() => {
-            if (!user && !showPrompt) {
+            if (!user && !showPrompt && !showFallback) {
+              // Show auth prompt
               showAuthPrompt(path);
               setShowPrompt(true);
             }
-          }, [user, path, showPrompt]);
+          }, [user, path, showPrompt, showFallback]);
           
-          // Only render the component if user is logged in
-          return user ? <Component {...props} /> : null;
+          // Handle auth modal closing (when user clicks X)
+          useEffect(() => {
+            // If user dismissed the auth modal, show them a fallback/back button
+            const handleAuthClosed = () => {
+              if (!user && showPrompt) {
+                setShowFallback(true);
+              }
+            };
+            
+            // Listen for the dialog closing event
+            document.addEventListener('authPromptClosed', handleAuthClosed);
+            
+            return () => {
+              document.removeEventListener('authPromptClosed', handleAuthClosed);
+            };
+          }, [user, showPrompt]);
+          
+          // If logged in, show the protected content
+          if (user) {
+            return <Component {...props} />;
+          }
+          
+          // If they dismissed the login prompt, show them a "Back" option
+          if (showFallback) {
+            return (
+              <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center">
+                <h2 className="text-2xl font-bold mb-4">Authentication Required</h2>
+                <p className="mb-6 text-muted-foreground max-w-md">
+                  You need to be signed in to view this content. You can go back or try signing in again.
+                </p>
+                <div className="flex gap-4">
+                  <Button onClick={() => window.history.back()} variant="outline">
+                    Go Back
+                  </Button>
+                  <Button onClick={() => {
+                    setShowFallback(false);
+                    setShowPrompt(false);
+                  }}>
+                    Sign In
+                  </Button>
+                </div>
+              </div>
+            );
+          }
+          
+          // While auth is being determined
+          return null;
         }}
       />
     );

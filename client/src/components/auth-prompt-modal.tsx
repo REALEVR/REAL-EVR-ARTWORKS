@@ -18,8 +18,21 @@ interface AuthPromptModalProps {
 }
 
 export default function AuthPromptModal({ isOpen, onClose, targetUrl }: AuthPromptModalProps) {
+  // Handle the close event by both calling the provided onClose handler
+  // and dispatching a custom event that our components can listen for
+  const handleClose = () => {
+    // Call the provided onClose handler
+    onClose();
+    
+    // Dispatch a custom event that our components can listen for
+    const closeEvent = new CustomEvent('authPromptClosed', {
+      detail: { targetUrl }
+    });
+    document.dispatchEvent(closeEvent);
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader className="text-center">
           <div className="flex justify-center mb-4">
@@ -46,7 +59,7 @@ export default function AuthPromptModal({ isOpen, onClose, targetUrl }: AuthProm
           </div>
         </div>
         <button 
-          onClick={onClose} 
+          onClick={handleClose} 
           className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
         >
           <X className="h-4 w-4" />
