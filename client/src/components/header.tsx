@@ -68,15 +68,36 @@ export default function Header() {
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="p-2 text-white hover:bg-white/10">
-                    <User className="h-5 w-5" />
+                  <Button variant="ghost" className="relative p-2 text-white hover:bg-white/10 rounded-full overflow-hidden">
+                    {user.profileImage ? (
+                      <img 
+                        src={user.profileImage} 
+                        alt={user.name} 
+                        className="h-8 w-8 rounded-full object-cover"
+                      />
+                    ) : (
+                      <User className="h-5 w-5" />
+                    )}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col space-y-1">
-                      <p className="font-medium text-sm">{user.name}</p>
-                      <p className="text-xs text-muted-foreground">@{user.username}</p>
+                    <div className="flex items-center gap-3">
+                      {user.profileImage ? (
+                        <img 
+                          src={user.profileImage} 
+                          alt={user.name} 
+                          className="h-10 w-10 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
+                          <User className="h-5 w-5" />
+                        </div>
+                      )}
+                      <div className="flex flex-col">
+                        <p className="font-medium text-sm">{user.name}</p>
+                        <p className="text-xs text-muted-foreground">@{user.username}</p>
+                      </div>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />

@@ -22,8 +22,8 @@ import { AuthPromptProvider, useAuthPrompt } from "./contexts/auth-prompt-contex
 
 // User context
 type UserContextType = {
-  user: { id: number; username: string; name: string } | null;
-  setUser: React.Dispatch<React.SetStateAction<{ id: number; username: string; name: string } | null>>;
+  user: { id: number; username: string; name: string; profileImage?: string } | null;
+  setUser: React.Dispatch<React.SetStateAction<{ id: number; username: string; name: string; profileImage?: string } | null>>;
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -128,7 +128,7 @@ function Router() {
 }
 
 function App() {
-  const [user, setUser] = useState<{ id: number; username: string; name: string } | null>(null);
+  const [user, setUser] = useState<{ id: number; username: string; name: string; profileImage?: string } | null>(null);
 
   return (
     <QueryClientProvider client={queryClient}>
