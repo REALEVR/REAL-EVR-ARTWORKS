@@ -79,6 +79,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch users", error });
     }
   });
+  
+  // Get a single user by ID
+  app.get("/api/users/:userId", async (req: Request, res: Response) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      if (isNaN(userId)) {
+        return res.status(400).json({ message: "Invalid user ID" });
+      }
+      
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Remove password from response
+      const { password, ...userWithoutPassword } = user;
+      res.status(200).json(userWithoutPassword);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch user", error });
+    }
+  });
 
   // Galleries
   app.post("/api/galleries", upload.single("coverImage"), async (req: Request, res: Response) => {
