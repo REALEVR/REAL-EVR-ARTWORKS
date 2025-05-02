@@ -16,6 +16,7 @@ import Register from "@/pages/auth/register";
 import Exhibitions from "@/pages/exhibitions";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { AuthPromptProvider } from "./contexts/auth-prompt-context";
 
 // User context
 type UserContextType = {
@@ -52,14 +53,16 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <UserContext.Provider value={{ user, setUser }}>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow">
-              <Toaster />
-              <Router />
-            </main>
-            <Footer />
-          </div>
+          <AuthPromptProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">
+                <Toaster />
+                <Router />
+              </main>
+              <Footer />
+            </div>
+          </AuthPromptProvider>
         </UserContext.Provider>
       </TooltipProvider>
     </QueryClientProvider>

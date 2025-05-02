@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GalleryGrid from "@/components/gallery-grid";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDate } from "@/lib/utils";
+import ProtectedContent from "@/components/protected-content";
 
 export default function ArtistProfile() {
   const { id } = useParams();
