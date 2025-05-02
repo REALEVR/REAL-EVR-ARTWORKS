@@ -14,6 +14,7 @@ import GalleryCreate from "@/pages/gallery/create";
 import Login from "@/pages/auth/login";
 import Register from "@/pages/auth/register";
 import Exhibitions from "@/pages/exhibitions";
+import About from "@/pages/about";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { AuthPromptProvider } from "./contexts/auth-prompt-context";
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/create-gallery" component={GalleryCreate} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
   );
