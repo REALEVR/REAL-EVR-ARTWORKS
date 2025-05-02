@@ -66,6 +66,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/users", async (req: Request, res: Response) => {
+    try {
+      const users = await storage.getAllUsers();
+      // Remove passwords from the response
+      const usersWithoutPasswords = users.map(user => {
+        const { password, ...userWithoutPassword } = user;
+        return userWithoutPassword;
+      });
+      res.status(200).json(usersWithoutPasswords);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch users", error });
+    }
+  });
+
   // Galleries
   app.post("/api/galleries", upload.single("coverImage"), async (req: Request, res: Response) => {
     try {

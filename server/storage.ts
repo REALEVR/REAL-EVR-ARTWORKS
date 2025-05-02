@@ -12,6 +12,7 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  getAllUsers(): Promise<User[]>;
   
   // Gallery operations
   createGallery(gallery: InsertGallery): Promise<Gallery>;
@@ -49,6 +50,10 @@ export class DatabaseStorage implements IStorage {
       .values(insertUser)
       .returning();
     return user;
+  }
+  
+  async getAllUsers(): Promise<User[]> {
+    return db.select().from(users);
   }
 
   // Gallery operations
