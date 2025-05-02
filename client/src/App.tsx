@@ -40,17 +40,18 @@ function Router() {
       <Route 
         path={path}
         component={(props) => {
-          const location = path;
+          const [showPrompt, setShowPrompt] = useState(false);
           
           // If user is not logged in, show auth prompt with this route as redirect target
           useEffect(() => {
-            if (!user) {
-              showAuthPrompt(location);
+            if (!user && !showPrompt) {
+              showAuthPrompt(path);
+              setShowPrompt(true);
             }
-          }, [user]);
+          }, [user, path, showPrompt]);
           
           // Only render the component if user is logged in
-          return user ? <Component {...props} {...rest} /> : null;
+          return user ? <Component {...props} /> : null;
         }}
       />
     );
@@ -59,15 +60,15 @@ function Router() {
   return (
     <Switch>
       {/* Public Routes - Accessible without login */}
+      <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/explore" component={Explore} />
+      <Route path="/exhibitions" component={Exhibitions} />
+      <Route path="/artists" component={ArtistsList} />
       
       {/* Protected Routes - Require Authentication */}
-      <ProtectedRoute path="/" component={Home} />
-      <ProtectedRoute path="/explore" component={Explore} />
-      <ProtectedRoute path="/exhibitions" component={Exhibitions} />
-      <ProtectedRoute path="/artists" component={ArtistsList} />
       <ProtectedRoute path="/artist/:id" component={ArtistProfile} />
       <ProtectedRoute path="/gallery/:id" component={GalleryView} />
       <ProtectedRoute path="/create-gallery" component={GalleryCreate} />
