@@ -1,110 +1,139 @@
 <svg width="100%" height="100%" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6c5ce7" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#fd79a8" stop-opacity="0.8" />
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111111" />
+      <stop offset="100%" stop-color="#333333" />
     </linearGradient>
-    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0984e3" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#00cec9" stop-opacity="0.8" />
+    <linearGradient id="art1-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c5ce7" />
+      <stop offset="100%" stop-color="#a29bfe" />
     </linearGradient>
-    <linearGradient id="grad3" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#fdcb6e" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#e17055" stop-opacity="0.8" />
+    <linearGradient id="art2-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e84393" />
+      <stop offset="100%" stop-color="#fd79a8" />
     </linearGradient>
-    <pattern id="pattern1" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
-      <rect width="10" height="10" fill="#6c5ce7" fill-opacity="0.3" />
-    </pattern>
-    <pattern id="pattern2" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(60)">
-      <circle cx="15" cy="15" r="5" fill="#fd79a8" fill-opacity="0.3" />
-    </pattern>
+    <linearGradient id="art3-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00b894" />
+      <stop offset="100%" stop-color="#55efc4" />
+    </linearGradient>
+    <linearGradient id="art4-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdcb6e" />
+      <stop offset="100%" stop-color="#ffeaa7" />
+    </linearGradient>
+    <linearGradient id="art5-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7675" />
+      <stop offset="100%" stop-color="#fab1a0" />
+    </linearGradient>
+    <linearGradient id="art6-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0984e3" />
+      <stop offset="100%" stop-color="#74b9ff" />
+    </linearGradient>
   </defs>
   
-  <!-- Background with gradient -->
-  <rect width="100%" height="100%" fill="#111" />
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bg-gradient)" />
   
-  <!-- Abstract art elements - grid of different art pieces -->
-  
+  <!-- Art Pieces Grid -->
   <!-- Row 1 -->
-  <rect x="50" y="50" width="200" height="200" fill="url(#grad1)" />
-  <circle cx="350" cy="150" r="100" fill="url(#grad2)" />
-  <polygon points="500,50 700,50 600,250" fill="url(#grad3)" />
-  <rect x="750" y="50" width="200" height="200" fill="url(#pattern1)" />
-  <rect x="1000" y="100" width="150" height="100" rx="50" ry="50" fill="#a29bfe" opacity="0.7" />
+  <g transform="translate(100, 50)">
+    <!-- Abstract Art 1 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <circle cx="100" cy="100" r="75" fill="url(#art1-gradient)" />
+    <rect x="60" y="60" width="80" height="80" fill="none" stroke="white" stroke-width="5" />
+    <line x1="0" y1="0" x2="200" y2="200" stroke="white" stroke-width="3" />
+    <line x1="200" y1="0" x2="0" y2="200" stroke="white" stroke-width="3" />
+  </g>
+  
+  <g transform="translate(350, 50)">
+    <!-- Abstract Art 2 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <path d="M0,100 C50,50 150,150 200,100 S150,0 100,50 S0,150 0,100 Z" fill="url(#art2-gradient)" />
+    <circle cx="100" cy="100" r="30" fill="white" opacity="0.5" />
+  </g>
+  
+  <g transform="translate(600, 50)">
+    <!-- Abstract Art 3 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <rect x="25" y="25" width="150" height="150" fill="url(#art3-gradient)" />
+    <circle cx="100" cy="100" r="50" fill="white" opacity="0.5" />
+    <rect x="75" y="75" width="50" height="50" fill="black" />
+  </g>
+  
+  <g transform="translate(850, 50)">
+    <!-- Abstract Art 4 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <path d="M0,0 L200,0 L100,200 Z" fill="url(#art4-gradient)" />
+    <path d="M50,50 L150,50 L100,150 Z" fill="white" opacity="0.6" />
+  </g>
   
   <!-- Row 2 -->
-  <polygon points="50,300 250,300 150,500" fill="#74b9ff" opacity="0.7" />
-  <rect x="300" y="300" width="150" height="150" rx="20" ry="20" fill="#55efc4" opacity="0.7" />
-  <circle cx="550" cy="375" r="75" fill="url(#pattern2)" />
-  <rect x="650" y="300" width="300" height="150" fill="#ffeaa7" opacity="0.6" />
-  <polygon points="1000,300 1150,300 1075,450" fill="#fab1a0" opacity="0.7" />
+  <g transform="translate(100, 300)">
+    <!-- Abstract Art 5 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <rect x="25" y="25" width="150" height="150" rx="75" fill="url(#art5-gradient)" />
+    <rect x="50" y="50" width="100" height="100" rx="50" fill="white" opacity="0.3" />
+    <rect x="75" y="75" width="50" height="50" rx="25" fill="url(#art5-gradient)" opacity="0.6" />
+  </g>
+  
+  <g transform="translate(350, 300)">
+    <!-- Abstract Art 6 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <rect x="0" y="0" width="200" height="200" fill="url(#art6-gradient)" />
+    <path d="M0,0 L200,200 M0,40 L160,200 M40,0 L200,160 M0,80 L120,200 M80,0 L200,120 M0,120 L80,200 M120,0 L200,80 M0,160 L40,200 M160,0 L200,40" stroke="white" stroke-width="3" />
+  </g>
+  
+  <g transform="translate(600, 300)">
+    <!-- Abstract Art 7 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <circle cx="50" cy="50" r="40" fill="#e74c3c" />
+    <circle cx="150" cy="50" r="40" fill="#3498db" />
+    <circle cx="50" cy="150" r="40" fill="#f1c40f" />
+    <circle cx="150" cy="150" r="40" fill="#2ecc71" />
+    <rect x="75" y="75" width="50" height="50" fill="white" />
+  </g>
+  
+  <g transform="translate(850, 300)">
+    <!-- Abstract Art 8 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <path d="M0,100 C0,20 200,20 200,100 C200,180 0,180 0,100 Z" fill="#9b59b6" />
+    <path d="M50,100 C50,40 150,40 150,100 C150,160 50,160 50,100 Z" fill="white" opacity="0.3" />
+  </g>
   
   <!-- Row 3 -->
-  <circle cx="125" cy="600" r="75" fill="#d63031" opacity="0.6" />
-  <rect x="250" y="550" width="150" height="150" fill="#e84393" opacity="0.5" />
-  <path d="M450,550 C500,500 550,600 600,550 S650,650 700,600" stroke="#0984e3" stroke-width="10" fill="none" />
-  <rect x="750" y="550" width="150" height="150" fill="#00cec9" opacity="0.5" />
-  <polygon points="950,550 1100,550 1025,700" fill="#6c5ce7" opacity="0.5" />
+  <g transform="translate(100, 550)">
+    <!-- Abstract Art 9 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <line x1="20" y1="20" x2="180" y2="20" stroke="#e74c3c" stroke-width="10" />
+    <line x1="20" y1="50" x2="180" y2="50" stroke="#f39c12" stroke-width="10" />
+    <line x1="20" y1="80" x2="180" y2="80" stroke="#f1c40f" stroke-width="10" />
+    <line x1="20" y1="110" x2="180" y2="110" stroke="#2ecc71" stroke-width="10" />
+    <line x1="20" y1="140" x2="180" y2="140" stroke="#3498db" stroke-width="10" />
+    <line x1="20" y1="170" x2="180" y2="170" stroke="#9b59b6" stroke-width="10" />
+  </g>
   
-  <!-- Decorative lines -->
-  <line x1="0" y1="0" x2="1200" y2="800" stroke="#fff" stroke-width="2" opacity="0.3" />
-  <line x1="1200" y1="0" x2="0" y2="800" stroke="#fff" stroke-width="2" opacity="0.3" />
+  <g transform="translate(350, 550)">
+    <!-- Abstract Art 10 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <rect x="20" y="20" width="70" height="70" fill="#e74c3c" />
+    <rect x="110" y="20" width="70" height="70" fill="#f39c12" />
+    <rect x="20" y="110" width="70" height="70" fill="#3498db" />
+    <rect x="110" y="110" width="70" height="70" fill="#2ecc71" />
+  </g>
   
-  <!-- Random smaller art elements scattered around -->
-  <circle cx="200" cy="450" r="25" fill="#ff7675" opacity="0.6" />
-  <circle cx="800" cy="250" r="30" fill="#fdcb6e" opacity="0.7" />
-  <circle cx="950" cy="500" r="20" fill="#55efc4" opacity="0.8" />
-  <circle cx="400" cy="700" r="35" fill="#fd79a8" opacity="0.5" />
-  <circle cx="600" cy="150" r="25" fill="#a29bfe" opacity="0.6" />
+  <g transform="translate(600, 550)">
+    <!-- Abstract Art 11 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#e74c3c" stroke-width="15" />
+    <circle cx="100" cy="100" r="60" fill="none" stroke="#f39c12" stroke-width="10" />
+    <circle cx="100" cy="100" r="40" fill="none" stroke="#2ecc71" stroke-width="5" />
+    <circle cx="100" cy="100" r="20" fill="#3498db" />
+  </g>
   
-  <!-- Small decorative dots pattern -->
-  <g fill="#fff" opacity="0.3">
-    <circle cx="100" cy="100" r="3" />
-    <circle cx="200" cy="200" r="3" />
-    <circle cx="300" cy="100" r="3" />
-    <circle cx="400" cy="200" r="3" />
-    <circle cx="500" cy="100" r="3" />
-    <circle cx="600" cy="200" r="3" />
-    <circle cx="700" cy="100" r="3" />
-    <circle cx="800" cy="200" r="3" />
-    <circle cx="900" cy="100" r="3" />
-    <circle cx="1000" cy="200" r="3" />
-    <circle cx="1100" cy="100" r="3" />
-    
-    <circle cx="100" cy="300" r="3" />
-    <circle cx="200" cy="400" r="3" />
-    <circle cx="300" cy="300" r="3" />
-    <circle cx="400" cy="400" r="3" />
-    <circle cx="500" cy="300" r="3" />
-    <circle cx="600" cy="400" r="3" />
-    <circle cx="700" cy="300" r="3" />
-    <circle cx="800" cy="400" r="3" />
-    <circle cx="900" cy="300" r="3" />
-    <circle cx="1000" cy="400" r="3" />
-    <circle cx="1100" cy="300" r="3" />
-    
-    <circle cx="100" cy="500" r="3" />
-    <circle cx="200" cy="600" r="3" />
-    <circle cx="300" cy="500" r="3" />
-    <circle cx="400" cy="600" r="3" />
-    <circle cx="500" cy="500" r="3" />
-    <circle cx="600" cy="600" r="3" />
-    <circle cx="700" cy="500" r="3" />
-    <circle cx="800" cy="600" r="3" />
-    <circle cx="900" cy="500" r="3" />
-    <circle cx="1000" cy="600" r="3" />
-    <circle cx="1100" cy="500" r="3" />
-    
-    <circle cx="100" cy="700" r="3" />
-    <circle cx="200" cy="800" r="3" />
-    <circle cx="300" cy="700" r="3" />
-    <circle cx="400" cy="800" r="3" />
-    <circle cx="500" cy="700" r="3" />
-    <circle cx="600" cy="800" r="3" />
-    <circle cx="700" cy="700" r="3" />
-    <circle cx="800" cy="800" r="3" />
-    <circle cx="900" cy="700" r="3" />
-    <circle cx="1000" cy="800" r="3" />
-    <circle cx="1100" cy="700" r="3" />
+  <g transform="translate(850, 550)">
+    <!-- Abstract Art 12 -->
+    <rect x="0" y="0" width="200" height="200" rx="5" fill="white" stroke="#444" stroke-width="5" />
+    <path d="M100,20 L20,180 L180,180 Z" fill="#e74c3c" />
+    <path d="M100,60 L60,140 L140,140 Z" fill="white" />
+    <circle cx="100" cy="110" r="15" fill="#2c3e50" />
   </g>
 </svg>

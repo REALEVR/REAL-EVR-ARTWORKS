@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Explore from "@/pages/explore";
@@ -17,7 +17,7 @@ import Exhibitions from "@/pages/exhibitions";
 import About from "@/pages/about";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { AuthPromptProvider } from "./contexts/auth-prompt-context";
+import { AuthPromptProvider, useAuthPrompt } from "./contexts/auth-prompt-context";
 
 // User context
 type UserContextType = {
@@ -31,15 +31,28 @@ export const UserContext = createContext<UserContextType>({
 });
 
 function Router() {
+  const { user } = useContext(UserContext);
+  const { showAuthPrompt } = useAuthPrompt();
+  
+  const ProtectedComponent = ({ component: Component, ...props }: { component: React.ComponentType, [key: string]: any }) => {
+    if (user) {
+      return <Component {...props} />;
+    } else {
+      // Show auth prompt
+      showAuthPrompt();
+      return null;
+    }
+  };
+
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/explore" component={Explore} />
-      <Route path="/exhibitions" component={Exhibitions} />
-      <Route path="/artists" component={ArtistsList} />
-      <Route path="/artist/:id" component={ArtistProfile} />
-      <Route path="/gallery/:id" component={GalleryView} />
-      <Route path="/create-gallery" component={GalleryCreate} />
+      <Route path="/" component={(props) => <ProtectedComponent component={Home} {...props} />} />
+      <Route path="/explore" component={(props) => <ProtectedComponent component={Explore} {...props} />} />
+      <Route path="/exhibitions" component={(props) => <ProtectedComponent component={Exhibitions} {...props} />} />
+      <Route path="/artists" component={(props) => <ProtectedComponent component={ArtistsList} {...props} />} />
+      <Route path="/artist/:id" component={(props) => <ProtectedComponent component={ArtistProfile} {...props} />} />
+      <Route path="/gallery/:id" component={(props) => <ProtectedComponent component={GalleryView} {...props} />} />
+      <Route path="/create-gallery" component={(props) => <ProtectedComponent component={GalleryCreate} {...props} />} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/about" component={About} />

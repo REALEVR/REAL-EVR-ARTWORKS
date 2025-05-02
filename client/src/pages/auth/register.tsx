@@ -28,6 +28,10 @@ export default function Register() {
   const [_, navigate] = useLocation();
   const { setUser } = useContext(UserContext);
   const { toast } = useToast();
+  
+  // Extract redirectTo from URL query parameters
+  const params = new URLSearchParams(window.location.search);
+  const redirectTo = params.get("redirect") || "/create-gallery";
 
   const form = useForm<RegisterForm>({
     resolver: zodResolver(registerSchema),
@@ -49,9 +53,9 @@ export default function Register() {
       setUser(data);
       toast({
         title: "Registration successful",
-        description: "Welcome to Artscape! You can now create your first gallery.",
+        description: "Welcome to REALEVR ARTWORKS! You can now explore virtual galleries.",
       });
-      navigate("/create-gallery");
+      navigate(redirectTo);
     },
     onError: (error) => {
       toast({
@@ -71,7 +75,7 @@ export default function Register() {
       <Card className="w-full max-w-lg">
         <CardHeader>
           <CardTitle className="font-serif text-2xl">Create an Account</CardTitle>
-          <CardDescription>Join Artscape to showcase your artwork in virtual galleries</CardDescription>
+          <CardDescription>Join REALEVR ARTWORKS to showcase your artwork in virtual galleries</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>

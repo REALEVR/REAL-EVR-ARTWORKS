@@ -1,51 +1,88 @@
 <svg width="100%" height="100%" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a1a1a" />
+    <linearGradient id="floor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#222222" />
+      <stop offset="100%" stop-color="#444444" />
+    </linearGradient>
+    <linearGradient id="wall-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#333333" />
       <stop offset="100%" stop-color="#111111" />
     </linearGradient>
-    <filter id="noise" x="0%" y="0%" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" result="noisy" />
+    <pattern id="floor-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="url(#floor-gradient)" />
+      <line x1="0" y1="80" x2="80" y2="80" stroke="#555" stroke-width="2" />
+      <line x1="80" y1="0" x2="80" y2="80" stroke="#555" stroke-width="2" />
+    </pattern>
+    <filter id="blur-filter" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
     </filter>
   </defs>
   
   <!-- Background -->
-  <rect width="100%" height="100%" fill="url(#bg-gradient)" />
+  <rect width="100%" height="100%" fill="#0f0f0f" />
   
-  <!-- Gallery hall perspective lines -->
-  <path d="M 0,400 L 1200,300" stroke="#333" stroke-width="2" />
-  <path d="M 0,450 L 1200,500" stroke="#333" stroke-width="2" />
+  <!-- Gallery Room -->
   
-  <!-- Gallery frames -->
-  <rect x="150" y="200" width="150" height="120" fill="#222" stroke="#444" stroke-width="3" />
-  <rect x="450" y="150" width="200" height="180" fill="#222" stroke="#444" stroke-width="3" />
-  <rect x="750" y="220" width="170" height="130" fill="#222" stroke="#444" stroke-width="3" />
-  <rect x="200" y="500" width="180" height="150" fill="#222" stroke="#444" stroke-width="3" />
-  <rect x="550" y="450" width="220" height="200" fill="#222" stroke="#444" stroke-width="3" />
-  <rect x="850" y="480" width="150" height="120" fill="#222" stroke="#444" stroke-width="3" />
+  <!-- Back Wall -->
+  <polygon points="200,100 1000,100 1000,500 200,500" fill="url(#wall-gradient)" />
   
-  <!-- Spotlights glow effect -->
-  <circle cx="225" cy="200" r="50" fill="#fff" opacity="0.05" />
-  <circle cx="550" cy="150" r="60" fill="#fff" opacity="0.05" />
-  <circle cx="835" cy="220" r="50" fill="#fff" opacity="0.05" />
-  <circle cx="290" cy="500" r="60" fill="#fff" opacity="0.05" />
-  <circle cx="660" cy="450" r="70" fill="#fff" opacity="0.05" />
-  <circle cx="925" cy="480" r="50" fill="#fff" opacity="0.05" />
+  <!-- Left Wall -->
+  <polygon points="0,0 200,100 200,500 0,700" fill="#111" />
   
-  <!-- Abstract art inside frames -->
-  <path d="M 175,260 Q 200,220 225,260 Q 250,300 275,260" stroke="#6c5ce7" stroke-width="3" fill="none" />
-  <path d="M 500,240 L 550,200 L 600,240 L 580,280 L 520,280 Z" fill="#e84393" opacity="0.7" />
-  <circle cx="835" cy="285" r="40" fill="#00cec9" opacity="0.7" />
-  <path d="M 230,550 L 290,520 L 350,550 L 320,600 L 260,600 Z" fill="#fdcb6e" opacity="0.7" />
-  <path d="M 600,550 Q 640,500 680,550 Q 720,600 660,620 Q 600,600 600,550" fill="#0984e3" opacity="0.5" />
-  <rect x="875" y="520" width="100" height="40" fill="#d63031" opacity="0.6" />
+  <!-- Right Wall -->
+  <polygon points="1200,0 1000,100 1000,500 1200,700" fill="#111" />
   
-  <!-- Decorative elements -->
-  <circle cx="120" cy="700" r="30" fill="#222" />
-  <circle cx="1080" cy="100" r="40" fill="#222" />
-  <rect x="0" y="750" width="1200" height="50" fill="#111" /> <!-- Floor -->
+  <!-- Floor -->
+  <polygon points="0,700 200,500 1000,500 1200,700" fill="url(#floor-pattern)" />
   
-  <!-- Apply noise filter to whole scene -->
-  <rect width="100%" height="100%" fill="transparent" filter="url(#noise)" />
+  <!-- Ceiling Light Glow -->
+  <ellipse cx="600" cy="150" rx="300" ry="50" fill="white" opacity="0.1" filter="url(#blur-filter)" />
+  
+  <!-- Art on Walls -->
+  
+  <!-- Left Wall Art -->
+  <rect x="250" y="150" width="150" height="200" fill="#222" stroke="#333" stroke-width="10" />
+  <rect x="430" y="150" width="150" height="200" fill="#222" stroke="#333" stroke-width="10" />
+  <rect x="610" y="150" width="150" height="200" fill="#222" stroke="#333" stroke-width="10" />
+  <rect x="790" y="150" width="150" height="200" fill="#222" stroke="#333" stroke-width="10" />
+  
+  <!-- People Silhouettes -->
+  <ellipse cx="300" cy="620" rx="40" ry="10" fill="#000" opacity="0.5" />
+  <path d="M300,620 C280,580 320,580 300,620 L290,550 L310,550 Z" fill="#000" opacity="0.8" />
+  
+  <ellipse cx="500" cy="620" rx="40" ry="10" fill="#000" opacity="0.5" />
+  <path d="M500,620 C480,580 520,580 500,620 L490,550 L510,550 Z" fill="#000" opacity="0.8" />
+  
+  <ellipse cx="700" cy="620" rx="40" ry="10" fill="#000" opacity="0.5" />
+  <path d="M700,620 C680,580 720,580 700,620 L690,550 L710,550 Z" fill="#000" opacity="0.8" />
+  
+  <ellipse cx="900" cy="620" rx="40" ry="10" fill="#000" opacity="0.5" />
+  <path d="M900,620 C880,580 920,580 900,620 L890,550 L910,550 Z" fill="#000" opacity="0.8" />
+  
+  <!-- Gallery Spotlights -->
+  <polygon points="250,100 290,100 340,350 250,350" fill="white" opacity="0.05" />
+  <polygon points="430,100 470,100 520,350 430,350" fill="white" opacity="0.05" />
+  <polygon points="610,100 650,100 700,350 610,350" fill="white" opacity="0.05" />
+  <polygon points="790,100 830,100 880,350 790,350" fill="white" opacity="0.05" />
+  
+  <!-- Artworks on the Wall -->
+  <!-- First Artwork -->
+  <rect x="260" y="170" width="130" height="160" fill="#ff6b6b" />
+  <circle cx="325" cy="230" r="40" fill="#48dbfb" opacity="0.8" />
+  <rect x="305" y="210" width="40" height="40" fill="#1dd1a1" opacity="0.6" />
+  
+  <!-- Second Artwork -->
+  <rect x="440" y="170" width="130" height="160" fill="#feca57" />
+  <path d="M450,330 L560,330 L505,170 Z" fill="#5f27cd" opacity="0.7" />
+  <circle cx="505" cy="250" r="30" fill="#ff9ff3" opacity="0.5" />
+  
+  <!-- Third Artwork -->
+  <rect x="620" y="170" width="130" height="160" fill="#54a0ff" />
+  <rect x="645" y="195" width="80" height="110" fill="black" opacity="0.6" />
+  <rect x="660" y="210" width="50" height="80" fill="white" opacity="0.8" />
+  
+  <!-- Fourth Artwork -->
+  <rect x="800" y="170" width="130" height="160" fill="#00d2d3" />
+  <circle cx="865" cy="230" r="50" fill="#ff9f43" opacity="0.7" />
+  <rect x="840" y="205" width="50" height="50" fill="#ee5253" opacity="0.6" />
 </svg>
