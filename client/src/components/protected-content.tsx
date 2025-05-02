@@ -1,5 +1,5 @@
 import { useContext, ReactNode, useEffect, useState } from "react";
-import { UserContext } from "@/App";
+import { UserContext } from "@/contexts/user-context";
 import { useAuthPrompt } from "@/contexts/auth-prompt-context";
 import { useLocation } from "wouter";
 

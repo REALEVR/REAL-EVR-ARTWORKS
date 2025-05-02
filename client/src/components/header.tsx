@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { UserContext } from "@/App";
+import { UserContext } from "@/contexts/user-context";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { UserContext } from "@/App";
+import { UserContext } from "@/contexts/user-context";
 import { Link } from "wouter";
 
 const loginSchema = z.object({

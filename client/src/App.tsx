@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Explore from "@/pages/explore";
@@ -19,17 +19,7 @@ import About from "@/pages/about";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { AuthPromptProvider, useAuthPrompt } from "./contexts/auth-prompt-context";
-
-// User context
-type UserContextType = {
-  user: { id: number; username: string; name: string; profileImage?: string } | null;
-  setUser: React.Dispatch<React.SetStateAction<{ id: number; username: string; name: string; profileImage?: string } | null>>;
-};
-
-export const UserContext = createContext<UserContextType>({
-  user: null,
-  setUser: () => {},
-});
+import { UserContext, UserProvider } from "./contexts/user-context";
 
 function Router() {
   const { user } = useContext(UserContext);
@@ -115,9 +105,9 @@ function Router() {
       <Route path="/explore" component={Explore} />
       <Route path="/exhibitions" component={Exhibitions} />
       <Route path="/artists" component={ArtistsList} />
+      <Route path="/artist/:id" component={ArtistProfile} />
       
       {/* Protected Routes - Require Authentication */}
-      <ProtectedRoute path="/artist/:id" component={ArtistProfile} />
       <ProtectedRoute path="/gallery/:id" component={GalleryView} />
       <ProtectedRoute path="/create-gallery" component={GalleryCreate} />
       
@@ -128,12 +118,10 @@ function Router() {
 }
 
 function App() {
-  const [user, setUser] = useState<{ id: number; username: string; name: string; profileImage?: string } | null>(null);
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserProvider>
           <AuthPromptProvider>
             <div className="flex flex-col min-h-screen">
               <Header />
@@ -144,7 +132,7 @@ function App() {
               <Footer />
             </div>
           </AuthPromptProvider>
-        </UserContext.Provider>
+        </UserProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
