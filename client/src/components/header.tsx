@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, User, LogOut, Plus } from "lucide-react";
+import logoImg from "../assets/logo.png";
 
 export default function Header() {
   const [location] = useLocation();
@@ -35,11 +36,10 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-black shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          <span className="font-tech text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">REALEVR</span>
-          <span className="font-medium text-2xl ml-2 tracking-wide">ART WORKS</span>
+          <img src={logoImg} alt="REALEVR ART WORKS" className="h-11 w-auto" />
         </Link>
         
         <div className="hidden md:flex items-center space-x-8">
@@ -47,7 +47,7 @@ export default function Header() {
             <Link 
               key={item.name} 
               href={item.href}
-              className={`font-medium text-sm hover:text-accent transition-colors ${
+              className={`font-medium text-sm text-white hover:text-accent transition-colors ${
                 isActive(item.href) ? 'text-accent' : ''
               }`}
             >
@@ -59,7 +59,7 @@ export default function Header() {
         <div className="flex items-center space-x-4">
           {user ? (
             <>
-              <Button asChild variant="outline" className="hidden md:flex">
+              <Button asChild variant="outline" className="hidden md:flex text-white border-white hover:bg-white/10">
                 <Link href="/create-gallery">
                   <Plus className="mr-2 h-4 w-4" />
                   Create Gallery
@@ -68,7 +68,7 @@ export default function Header() {
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="p-2">
+                  <Button variant="ghost" className="p-2 text-white hover:bg-white/10">
                     <User className="h-5 w-5" />
                   </Button>
                 </DropdownMenuTrigger>
