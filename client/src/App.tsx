@@ -8,6 +8,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Explore from "@/pages/explore";
 import ArtistProfile from "@/pages/artist/profile";
+import ArtistsList from "@/pages/artists";
 import GalleryView from "@/pages/gallery/view";
 import GalleryCreate from "@/pages/gallery/create";
 import Login from "@/pages/auth/login";
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/explore" component={Explore} />
       <Route path="/exhibitions" component={Exhibitions} />
+      <Route path="/artists" component={ArtistsList} />
       <Route path="/artist/:id" component={ArtistProfile} />
       <Route path="/gallery/:id" component={GalleryView} />
       <Route path="/create-gallery" component={GalleryCreate} />
