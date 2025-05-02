@@ -1,0 +1,11 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#2A1A41"/>
+  <circle cx="200" cy="150" r="80" fill="#633A82"/>
+  <rect x="120" y="200" width="160" height="140" rx="20" fill="#633A82"/>
+  <circle cx="160" cy="140" r="15" fill="#ECA4A6"/>
+  <circle cx="240" cy="140" r="15" fill="#ECA4A6"/>
+  <path d="M170 170 Q200 200 230 170" stroke="#ECA4A6" stroke-width="8" fill="none"/>
+  <text x="120" y="380" font-family="Arial" font-size="24" fill="#ECA4A6">ELENA VASQUEZ</text>
+  <path d="M50 50 L80 80 M90 50 L60 80 M150 30 L180 60 M190 30 L160 60" stroke="#ECA4A6" stroke-width="3" fill="none"/>
+  <path d="M300 50 L330 80 M340 50 L310 80 M250 30 L280 60 M290 30 L260 60" stroke="#ECA4A6" stroke-width="3" fill="none"/>
+</svg>

@@ -3,53 +3,41 @@ import { Link } from "wouter";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function FeaturedArtists() {
-  // In a real app, you would have a dedicated endpoint for featured artists
-  // For now, we'll use the first few users as "featured"
+  // Get users from the database
   const { data: users, isLoading } = useQuery({
     queryKey: ["/api/users"],
   });
 
-  // Mock data for the featured artists until we have real data
-  const mockFeaturedArtists = [
-    {
-      id: 1,
-      name: "Elena Vasquez",
-      username: "elena",
-      profileImage: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=400&h=400",
-      artType: "Contemporary Abstract",
-      artworksCount: 12,
-      galleriesCount: 3
-    },
-    {
-      id: 2,
-      name: "Marcus Chen",
-      username: "marcus",
-      profileImage: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&h=400",
-      artType: "Digital Surrealism",
-      artworksCount: 24,
-      galleriesCount: 5
-    },
-    {
-      id: 3,
-      name: "Sophia Kim",
-      username: "sophia",
-      profileImage: "https://images.unsplash.com/photo-1536924430914-91f9e2041b83?auto=format&fit=crop&w=400&h=400",
-      artType: "Mixed Media Expressionist",
-      artworksCount: 18,
-      galleriesCount: 2
-    },
-    {
-      id: 4,
-      name: "James Donovan",
-      username: "james",
-      profileImage: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&h=400", 
-      artType: "Neo-Classical Sculpture",
-      artworksCount: 9,
-      galleriesCount: 1
+  // Map user data to artist format with additional metadata
+  const processedArtists = Array.isArray(users) ? users.map(user => {
+    // Extract art type from bio if available
+    let artType = "Contemporary Artist";
+    if (user.bio) {
+      if (user.bio.toLowerCase().includes("abstract")) {
+        artType = "Contemporary Abstract";
+      } else if (user.bio.toLowerCase().includes("digital")) {
+        artType = "Digital Surrealism";
+      } else if (user.bio.toLowerCase().includes("mixed media")) {
+        artType = "Mixed Media Expressionist";
+      } else if (user.bio.toLowerCase().includes("classical") || user.bio.toLowerCase().includes("sculptor")) {
+        artType = "Neo-Classical Sculpture";
+      }
     }
-  ];
+    
+    // For now, generate some gallery and artwork counts (these would come from real counts in a full app)
+    const artworksCount = user.id * 3;
+    const galleriesCount = Math.max(1, Math.floor(user.id / 2));
+    
+    return {
+      ...user,
+      artType,
+      artworksCount,
+      galleriesCount
+    };
+  }) : [];
 
-  const featuredArtists = users || mockFeaturedArtists;
+  // Use the user data or empty array if not loaded yet
+  const featuredArtists = processedArtists;
 
   return (
     <section className="py-16 bg-white">

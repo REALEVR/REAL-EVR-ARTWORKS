@@ -1,0 +1,17 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#143642"/>
+  <circle cx="200" cy="150" r="80" fill="#0F8B8D"/>
+  <rect x="120" y="200" width="160" height="140" rx="20" fill="#0F8B8D"/>
+  <circle cx="160" cy="140" r="15" fill="#EC9A29"/>
+  <circle cx="240" cy="140" r="15" fill="#EC9A29"/>
+  <path d="M170 180 Q200 190 230 180" stroke="#EC9A29" stroke-width="8" fill="none"/>
+  <text x="130" y="380" font-family="Arial" font-size="24" fill="#EC9A29">MARCUS CHEN</text>
+  <rect x="50" y="50" width="20" height="20" fill="#EC9A29" />
+  <rect x="80" y="50" width="20" height="20" fill="#EC9A29" />
+  <rect x="50" y="80" width="20" height="20" fill="#EC9A29" />
+  <rect x="80" y="80" width="20" height="20" fill="#EC9A29" />
+  <rect x="300" y="50" width="20" height="20" fill="#EC9A29" />
+  <rect x="330" y="50" width="20" height="20" fill="#EC9A29" />
+  <rect x="300" y="80" width="20" height="20" fill="#EC9A29" />
+  <rect x="330" y="80" width="20" height="20" fill="#EC9A29" />
+</svg>
