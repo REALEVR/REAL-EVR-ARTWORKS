@@ -1,15 +1,15 @@
-import { pgTable, text, serial, integer, boolean, timestamp, foreignKey } from "drizzle-orm/pg-core";
+import { mysqlTable, text, int, boolean, timestamp, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { relations } from "drizzle-orm";
 
 // User schema
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
+export const users = mysqlTable("users", {
+  id: int("id").primaryKey().autoincrement(),
+  username: varchar("username", { length: 255 }).notNull().unique(),
   password: text("password").notNull(),
-  email: text("email").notNull().unique(),
-  name: text("name").notNull(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
+  name: varchar("name", { length: 255 }).notNull(),
   bio: text("bio"),
   profileImage: text("profile_image"),
 });
@@ -24,12 +24,12 @@ export const insertUserSchema = createInsertSchema(users).omit({
 });
 
 // Gallery schema
-export const galleries = pgTable("galleries", {
-  id: serial("id").primaryKey(),
-  title: text("title").notNull(),
+export const galleries = mysqlTable("galleries", {
+  id: int("id").primaryKey().autoincrement(),
+  title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   coverImage: text("cover_image"),
-  userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  userId: int("user_id").notNull(),
   featured: boolean("featured").default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -48,14 +48,14 @@ export const insertGallerySchema = createInsertSchema(galleries).omit({
 });
 
 // Artwork schema
-export const artworks = pgTable("artworks", {
-  id: serial("id").primaryKey(),
-  title: text("title").notNull(),
+export const artworks = mysqlTable("artworks", {
+  id: int("id").primaryKey().autoincrement(),
+  title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
-  medium: text("medium"),
+  medium: varchar("medium", { length: 100 }),
   imageUrl: text("image_url").notNull(),
-  galleryId: integer("gallery_id").notNull().references(() => galleries.id, { onDelete: "cascade" }),
-  userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  galleryId: int("gallery_id").notNull(),
+  userId: int("user_id").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -74,6 +74,22 @@ export const insertArtworkSchema = createInsertSchema(artworks).omit({
   id: true,
   createdAt: true,
 });
+
+// Medium types for validation
+export const mediumTypes = [
+  "oil",
+  "acrylic", 
+  "watercolor",
+  "digital",
+  "mixed_media",
+  "sculpture",
+  "photography",
+  "drawing",
+  "printmaking",
+  "textile",
+  "ceramic",
+  "other"
+] as const;
 
 // Types
 export type User = typeof users.$inferSelect;
