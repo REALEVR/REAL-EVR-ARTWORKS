@@ -9,7 +9,7 @@ REALEVR ART WORKS is a modern web application that enables artists to create and
 ### Full-Stack Structure
 - **Frontend**: React with TypeScript, built using Vite
 - **Backend**: Express.js server with TypeScript
-- **Database**: MySQL with Drizzle ORM
+- **Database**: PostgreSQL with Drizzle ORM
 - **Styling**: TailwindCSS with shadcn/ui components
 - **File Uploads**: Multer for artwork and gallery cover images
 - **Authentication**: Session-based user management
@@ -22,7 +22,7 @@ The application follows a monorepo structure with clear separation of concerns:
 
 ## Key Components
 
-### Database Schema (MySQL with Drizzle ORM)
+### Database Schema (PostgreSQL with Drizzle ORM)
 - **Users**: Artist profiles with authentication, bio, and profile images
 - **Galleries**: Virtual exhibition spaces owned by users
 - **Artworks**: Individual art pieces belonging to galleries
@@ -60,7 +60,7 @@ The application follows a monorepo structure with clear separation of concerns:
 ### Core Framework Dependencies
 - React 18 with TypeScript for frontend development
 - Express.js for backend API server
-- Drizzle ORM for MySQL database operations
+- Drizzle ORM for PostgreSQL database operations
 - TailwindCSS for styling and design system
 
 ### UI and UX Libraries
@@ -94,6 +94,12 @@ The application follows a monorepo structure with clear separation of concerns:
 4. Database migrations: Drizzle handles schema changes
 
 ## Changelog
+
+## Recent Changes
+- January 24, 2025: Migrated database from MySQL to PostgreSQL for Replit compatibility
+- January 24, 2025: Updated schema to use pg-core instead of mysql-core
+- January 24, 2025: Converted database connection to use node-postgres
+- January 24, 2025: Project successfully running on Replit environment
 
 Changelog:
 - June 24, 2025. Initial setup
