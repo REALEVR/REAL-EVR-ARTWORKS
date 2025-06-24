@@ -1,11 +1,11 @@
-import { mysqlTable, text, int, boolean, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { pgTable, text, serial, boolean, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { relations } from "drizzle-orm";
 
 // User schema
-export const users = mysqlTable("users", {
-  id: int("id").primaryKey().autoincrement(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
   username: varchar("username", { length: 255 }).notNull().unique(),
   password: text("password").notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
@@ -24,12 +24,12 @@ export const insertUserSchema = createInsertSchema(users).omit({
 });
 
 // Gallery schema
-export const galleries = mysqlTable("galleries", {
-  id: int("id").primaryKey().autoincrement(),
+export const galleries = pgTable("galleries", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   coverImage: text("cover_image"),
-  userId: int("user_id").notNull(),
+  userId: serial("user_id").notNull(),
   featured: boolean("featured").default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -48,14 +48,14 @@ export const insertGallerySchema = createInsertSchema(galleries).omit({
 });
 
 // Artwork schema
-export const artworks = mysqlTable("artworks", {
-  id: int("id").primaryKey().autoincrement(),
+export const artworks = pgTable("artworks", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   medium: varchar("medium", { length: 100 }),
   imageUrl: text("image_url").notNull(),
-  galleryId: int("gallery_id").notNull(),
-  userId: int("user_id").notNull(),
+  galleryId: serial("gallery_id").notNull(),
+  userId: serial("user_id").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
