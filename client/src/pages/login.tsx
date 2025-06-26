@@ -45,7 +45,7 @@ const Login = () => {
   
   const loginMutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await apiRequest("POST", "/api/auth/login", data);
+      const response = await apiRequest("POST", "/api/users/login", data);
       return response.json();
     },
     onSuccess: (data) => {
@@ -63,14 +63,14 @@ const Login = () => {
   };
   
   return (
-    <div className="bg-secondary min-h-screen py-12">
+    <div className="bg-white min-h-screen py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader className="text-center">
+          <Card className="shadow-lg border-0">
+            <CardHeader className="text-center bg-blue-600 text-white rounded-t-lg">
               <CardTitle className="font-display text-2xl">Welcome back</CardTitle>
-              <CardDescription>
-                Sign in to your Artscape account
+              <CardDescription className="text-blue-100">
+                Sign in to your REALEVR account
               </CardDescription>
             </CardHeader>
             
@@ -142,7 +142,7 @@ const Login = () => {
                   
                   <Button 
                     type="submit" 
-                    className="w-full mt-6"
+                    className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white"
                     disabled={loginMutation.isPending}
                   >
                     {loginMutation.isPending ? "Signing in..." : "Sign in"}
@@ -151,11 +151,11 @@ const Login = () => {
               </Form>
             </CardContent>
             
-            <CardFooter className="flex justify-center border-t p-6">
+            <CardFooter className="flex justify-center border-t p-6 bg-gray-50 rounded-b-lg">
               <p className="text-sm text-gray-600">
                 Don't have an account yet?{" "}
                 <Link href="/register">
-                  <a className="text-accent font-medium hover:underline">Create an account</a>
+                  <a className="text-blue-600 font-medium hover:underline">Create an account</a>
                 </Link>
               </p>
             </CardFooter>

@@ -104,6 +104,8 @@ The application follows a monorepo structure with clear separation of concerns:
 - January 24, 2025: Prepared application for Supabase connection with SSL support
 - January 24, 2025: Successfully connected to Supabase "realevr" project with "artworks" database
 - January 24, 2025: Created database tables and login accounts in Supabase
+- January 24, 2025: Updated login/register pages with white background and blue styling
+- January 24, 2025: Fixed authentication system and API endpoints
 
 Changelog:
 - June 24, 2025. Initial setup
