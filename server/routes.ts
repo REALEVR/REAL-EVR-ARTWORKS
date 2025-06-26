@@ -104,18 +104,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Galleries
   app.post("/api/galleries", upload.single("coverImage"), async (req: Request, res: Response) => {
     try {
-      let galleryData = req.body;
+      // Convert FormData strings to proper types before validation
+      const galleryData = {
+        title: req.body.title,
+        description: req.body.description || null,
+        userId: parseInt(req.body.userId, 10),
+        featured: req.body.featured === 'true' || req.body.featured === true,
+        coverImage: req.file ? `/uploads/${req.file.filename}` : null,
+      };
       
-      if (req.file) {
-        galleryData.coverImage = `/uploads/${req.file.filename}`;
-      }
+      console.log('Processing gallery data:', galleryData);
       
       const validatedData = insertGallerySchema.parse(galleryData);
       const gallery = await storage.createGallery(validatedData);
       
       res.status(201).json(gallery);
     } catch (error) {
-      res.status(400).json({ message: "Invalid gallery data", error });
+      console.error('Gallery creation error:', error);
+      res.status(400).json({ message: "Invalid gallery data", error: error.message || error });
     }
   });
 

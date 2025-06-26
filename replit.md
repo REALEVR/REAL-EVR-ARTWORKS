@@ -106,6 +106,7 @@ The application follows a monorepo structure with clear separation of concerns:
 - January 24, 2025: Created database tables and login accounts in Supabase
 - January 24, 2025: Updated login/register pages with white background and blue styling
 - January 24, 2025: Fixed authentication system and API endpoints
+- January 24, 2025: Fixed gallery creation endpoint - resolved FormData type conversion issues
 
 Changelog:
 - June 24, 2025. Initial setup
