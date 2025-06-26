@@ -2,14 +2,11 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import * as schema from "@shared/schema";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
-}
+const databaseUrl = "postgresql://postgres.ehhigfsjtrhiyatwcmwh:Ranking%40ivan12@aws-0-eu-north-1.pooler.supabase.com:6543/postgres";
 
 export const connection = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: databaseUrl,
+  ssl: { rejectUnauthorized: false }
 });
 
 export const db = drizzle(connection, { schema });
