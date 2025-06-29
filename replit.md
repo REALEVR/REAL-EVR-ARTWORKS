@@ -8,11 +8,11 @@ REALEVR ART WORKS is a modern web application that enables artists to create and
 
 ### Full-Stack Structure
 - **Frontend**: React with TypeScript, built using Vite
-- **Backend**: Express.js server with TypeScript
-- **Database**: PostgreSQL with Drizzle ORM
+- **Backend**: FastAPI with Python (migrated from Express.js/TypeScript)
+- **Database**: PostgreSQL with SQLAlchemy ORM (with SQLite fallback for development)
 - **Styling**: TailwindCSS with shadcn/ui components
-- **File Uploads**: Multer for artwork and gallery cover images
-- **Authentication**: Session-based user management
+- **File Uploads**: FastAPI file handling for artwork and gallery cover images
+- **Authentication**: JWT-based token authentication (migrated from session-based)
 
 ### Monorepo Organization
 The application follows a monorepo structure with clear separation of concerns:
@@ -36,16 +36,19 @@ The application follows a monorepo structure with clear separation of concerns:
 - **Data Fetching**: TanStack Query for server state management
 
 ### Backend API Structure
-- RESTful API endpoints for CRUD operations
-- File upload handling for images
-- Database abstraction layer through storage interface
-- Error handling and logging middleware
+- FastAPI RESTful API endpoints for CRUD operations
+- Multipart form data handling for image uploads
+- SQLAlchemy ORM for database operations
+- Pydantic models for request/response validation
+- JWT token-based authentication middleware
 
 ### Authentication System
-- Session-based authentication
+- JWT token-based authentication (migrated from session-based)
+- Bearer token authorization in API requests
+- LocalStorage token persistence
 - Protected routes with auth prompt modals
 - User context management across the application
-- Registration and login workflows
+- Registration and login workflows with automatic token handling
 
 ## Data Flow
 
@@ -109,7 +112,12 @@ The application follows a monorepo structure with clear separation of concerns:
 - January 24, 2025: Fixed gallery creation endpoint - resolved FormData type conversion issues
 
 Changelog:
-- June 24, 2025. Initial setup
+- June 29, 2025: Successfully migrated backend from TypeScript/Express.js to Python/FastAPI
+- June 29, 2025: Converted authentication from session-based to JWT token-based system  
+- June 29, 2025: Updated database layer from Drizzle ORM to SQLAlchemy with PostgreSQL/SQLite support
+- June 29, 2025: Maintained all original functionality while converting to Python backend
+- June 29, 2025: Updated React frontend API client to work with JWT authentication
+- June 24, 2025: Initial setup
 
 ## User Preferences
 

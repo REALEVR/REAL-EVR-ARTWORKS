@@ -59,7 +59,7 @@ const Register = () => {
       return response.json();
     },
     onSuccess: (data) => {
-      login(data);
+      login(data.user, data.access_token);
       navigate("/create-gallery");
     },
     onError: (error: Error) => {

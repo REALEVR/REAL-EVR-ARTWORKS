@@ -49,7 +49,7 @@ const Login = () => {
       return response.json();
     },
     onSuccess: (data) => {
-      login(data);
+      login(data.user, data.access_token);
       navigate("/");
     },
     onError: (error: Error) => {

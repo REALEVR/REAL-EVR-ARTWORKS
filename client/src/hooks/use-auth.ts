@@ -5,11 +5,13 @@ import type { User } from "@/contexts/user-context";
 export function useAuth() {
   const { user, setUser } = useContext(UserContext);
 
-  const login = (userData: User) => {
+  const login = (userData: User, token: string) => {
+    localStorage.setItem('access_token', token);
     setUser(userData);
   };
 
   const logout = () => {
+    localStorage.removeItem('access_token');
     setUser(null);
   };
 
