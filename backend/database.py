@@ -9,8 +9,12 @@ if not DATABASE_URL:
     # For development, use SQLite if no PostgreSQL URL is provided
     DATABASE_URL = "sqlite:///./realevr.db"
 
-# Create engine
-engine = create_engine(DATABASE_URL)
+# Create engine with SSL mode for Supabase
+if DATABASE_URL.startswith("postgresql://"):
+    # Add SSL settings for Supabase connection
+    engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
+else:
+    engine = create_engine(DATABASE_URL)
 
 # Create session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
