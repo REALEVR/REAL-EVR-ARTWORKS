@@ -53,10 +53,10 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-const port = process.env.PORT || 5000;
+  const port = process.env.PORT || 5000;
 
-// Remove options like host and reusePort for Replit compatibility
-server.listen(port, () => {
-  log(`Serving on port ${port}`);
-});
-})
+  // Use 0.0.0.0 for Replit compatibility
+  server.listen(port, "0.0.0.0", () => {
+    log(`Server running on http://0.0.0.0:${port}`);
+  });
+})();
