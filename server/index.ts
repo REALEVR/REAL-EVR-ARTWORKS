@@ -1,4 +1,5 @@
-import express, { type Request, Response, NextFunction } from "express";
+import path from "path";
+import express, { Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -6,15 +7,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   const start = Date.now();
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
+  const originalResJson = res.json.bind(res);
+  res.json = function (bodyJson: any) {
     capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
+    return originalResJson(bodyJson);
   };
 
   res.on("finish", () => {
@@ -48,15 +49,22 @@ app.use((req, res, next) => {
   });
 
   if (app.get("env") === "development") {
+    // Dev mode: use Vite dev server integration
     await setupVite(app, server);
   } else {
+    // Production mode: serve frontend static files from build
     serveStatic(app);
+
+    // Serve React app for all other routes (support React Router)
+    app.get("*", (_req: Request, res: Response) => {
+      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
   }
 
-  const port = process.env.PORT || 5000;
+  const port = Number(process.env.PORT) || 5000;
+  const host = "0.0.0.0";
 
-  // Use 0.0.0.0 for Replit compatibility
-  server.listen(port, "0.0.0.0", () => {
-    log(`Server running on http://0.0.0.0:${port}`);
+  server.listen(port, host, () => {
+    log(`Server running on http://localhost:${port}`);
   });
 })();

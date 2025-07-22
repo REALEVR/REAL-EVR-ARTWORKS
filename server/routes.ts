@@ -7,6 +7,16 @@ import path from "path";
 import fs from "fs";
 import { nanoid } from "nanoid";
 
+// Extend Express Request type to include 'file' and 'files' for multer
+declare global {
+  namespace Express {
+    interface Request {
+      file?: Express.Multer.File;
+      files?: { [fieldname: string]: Express.Multer.File[] } | Express.Multer.File[];
+    }
+  }
+}
+
 // Configure multer for file uploads
 const uploadDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadDir)) {
@@ -171,7 +181,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       let artworkData = req.body;
       
-      if (req.file) {
+      if (req. ) {
         artworkData.imageUrl = `/uploads/${req.file.filename}`;
       } else {
         return res.status(400).json({ message: "Image file is required" });
