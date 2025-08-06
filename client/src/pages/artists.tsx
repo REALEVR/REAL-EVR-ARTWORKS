@@ -104,12 +104,12 @@ export default function ArtistsList() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Fetch artists from the API
-  const { data: artists, isLoading } = useQuery({
+  const { data: artists = [], isLoading } = useQuery({
     queryKey: ["/api/users"],
   });
 
   // Filter artists based on search query and active tab
-  const filteredArtists = artists
+  const filteredArtists = Array.isArray(artists)
     ? artists.filter((artist: any) => {
         const matchesSearch = artist.name
           .toLowerCase()

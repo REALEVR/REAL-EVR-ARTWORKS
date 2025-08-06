@@ -14,9 +14,10 @@ export default function Explore() {
   const styleOptions = getGalleryStyleOptions();
 
   // Filter galleries if needed (in a real app, this would likely be done server-side)
+  const galleriesArray = Array.isArray(galleries) ? galleries : [];
   const filteredGalleries = selectedStyle === "all" 
-    ? galleries 
-    : galleries?.filter((gallery: any) => {
+    ? galleriesArray
+    : galleriesArray.filter((gallery: any) => {
         // This is just a placeholder - in a real app, galleries would have a style property
         // For now, we'll just return all galleries regardless of the filter
         return true;

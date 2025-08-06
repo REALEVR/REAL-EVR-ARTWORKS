@@ -14,13 +14,15 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-black shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/">
           <a className="flex items-center">
             <span className="font-display text-2xl font-bold tracking-tight">Artscape</span>
+    
           </a>
         </Link>
+        </div>
         
         <div className="hidden md:flex items-center space-x-8">
           <Link href="/explore">
@@ -49,7 +51,7 @@ const Header = () => {
           {user ? (
             <>
               <Link href="/create-gallery">
-                <Button variant="accent" className="font-accent text-sm font-medium hidden md:block">
+                <Button variant="default" className="font-accent text-sm font-medium hidden md:block">
                   Create Gallery
                 </Button>
               </Link>
@@ -64,7 +66,7 @@ const Header = () => {
           ) : (
             <>
               <Link href="/login">
-                <Button variant="accent" className="font-accent text-sm font-medium">
+                <Button variant="default" className="font-accent text-sm font-medium">
                   Sign In
                 </Button>
               </Link>
@@ -78,20 +80,14 @@ const Header = () => {
               </Link>
             </>
           )}
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="md:hidden"
-            onClick={toggleMobileMenu}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
-        </div>
-      </div>
+          <Button
+              variant="outline"
+               className="md:hidden bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-sm"
+              onClick={toggleMobileMenu}
+>
+  {mobileMenuOpen ? "X" : "≡"}
+</Button>
+
       
       {/* Mobile Menu */}
       {mobileMenuOpen && (
@@ -127,6 +123,7 @@ const Header = () => {
           </nav>
         </div>
       )}
+      </div>
     </header>
   );
 };

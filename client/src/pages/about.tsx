@@ -13,7 +13,7 @@ export default function About() {
         <div className="absolute inset-0 flex items-center justify-center">
           <object 
             type="image/svg+xml" 
-            data="/images/gallery-bg.svg" 
+            data="/public/images/gallery-bg.svg" 
             className="w-full h-full"
             aria-label="Gallery Background"
           ></object>
@@ -55,7 +55,7 @@ export default function About() {
             >
               <object 
                 type="image/svg+xml"
-                data="/images/virtual-gallery.svg" 
+                data="/public/images/virtual-gallery.svg" 
                 className="w-full h-auto bg-gray-900"
                 aria-label="Virtual Art Gallery"
               ></object>
@@ -99,7 +99,7 @@ export default function About() {
         <div className="absolute inset-0 opacity-30 flex items-center justify-center">
           <object 
             type="image/svg+xml" 
-            data="/images/art-collage.svg" 
+            data="/images/art-collage.jpg" 
             className="w-full h-full"
             aria-label="Art Collage"
           ></object>
@@ -137,7 +137,7 @@ export default function About() {
                 showcase your work in ways that traditional galleries cannot offer - with interactive elements, 
                 global accessibility, and immersive experiences that bring your art to life.
               </p>
-              <Button asChild variant="outline" className="mt-4">
+              <Button asChild variant="outline" className="text-lg bg-black text-white">
                 <Link href="/register">Join Our Community</Link>
               </Button>
             </div>
@@ -156,7 +156,7 @@ export default function About() {
             <Button asChild size="lg" className="text-lg">
               <Link href="/create-gallery">Create Your Gallery</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-lg">
+            <Button asChild variant="outline" size="lg" className="text-lg bg-black text-white">
               <Link href="/explore">Explore Exhibitions</Link>
             </Button>
           </div>

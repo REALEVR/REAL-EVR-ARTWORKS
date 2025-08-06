@@ -131,7 +131,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(gallery);
     } catch (error) {
       console.error('Gallery creation error:', error);
-      res.status(400).json({ message: "Invalid gallery data", error: error.message || error });
+      const errorMessage = typeof error === "object" && error !== null && "message" in error ? (error as { message: string }).message : String(error);
+      res.status(400).json({ message: "Invalid gallery data", error: errorMessage });
     }
   });
 
@@ -181,7 +182,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       let artworkData = req.body;
       
-      if (req. ) {
+      if (req.file && req.file.filename) {
         artworkData.imageUrl = `/uploads/${req.file.filename}`;
       } else {
         return res.status(400).json({ message: "Image file is required" });

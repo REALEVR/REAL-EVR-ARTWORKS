@@ -3,31 +3,45 @@ import uvicorn
 import os
 import sys
 import subprocess
-import threading
-import time
+import shutil
 
-# Add backend directory to path
+# Add backend directory to Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'backend'))
 
 def run_frontend():
-    """Run the Vite development server for the frontend"""
+    """Build the Vite-based frontend using npm"""
+    print("🔧 Building frontend using npm...")
+    
+    # Check if npm is installed
+    if shutil.which("npm") is None:
+        print("❌ npm is not installed or not found in PATH. Please install Node.js from https://nodejs.org/")
+        sys.exit(1)
+    
     try:
-        subprocess.run(["npm", "run", "build"], check=True)
-        print("Frontend built successfully")
+        # Use shell=True on Windows to resolve npm
+        subprocess.run("npm run build", shell=True, check=True, cwd=os.path.dirname(__file__))
+        print("✅ Frontend built successfully.")
     except subprocess.CalledProcessError as e:
-        print(f"Frontend build failed: {e}")
+        print(f"❌ Frontend build failed: {e}")
+        sys.exit(1)
 
 def run_backend():
-    """Run the FastAPI backend server"""
-    from backend.main import app
+    """Run the FastAPI backend server with Uvicorn"""
+    print("🚀 Starting FastAPI backend...")
+    try:
+        from backend.main import app
+    except ImportError as e:
+        print(f"❌ Failed to import backend: {e}")
+        sys.exit(1)
+
     port = int(os.getenv("PORT", 5000))
     uvicorn.run(app, host="0.0.0.0", port=port, reload=True)
 
 if __name__ == "__main__":
-    print("Starting REALEVR ART WORKS - Python + React version")
-    
-    # Build frontend first
+    print("🎨 Starting REALEVR ART WORKS - Python + React version")
+
+    # Step 1: Build the frontend
     run_frontend()
-    
-    # Start backend
+
+    # Step 2: Start the backend
     run_backend()

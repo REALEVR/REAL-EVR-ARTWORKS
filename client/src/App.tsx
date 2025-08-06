@@ -15,6 +15,7 @@ import GalleryCreate from "@/pages/gallery/create";
 import Login from "@/pages/auth/login";
 import Register from "@/pages/auth/register";
 import Exhibitions from "@/pages/exhibitions";
+import contact_us from "@/pages/contact";
 import About from "@/pages/about";
 import Header from "@/components/header";
 import Footer from "@/components/footer";

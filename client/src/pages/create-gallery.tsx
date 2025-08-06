@@ -118,7 +118,7 @@ const CreateGallery = () => {
         <Button 
           variant="link" 
           className="mb-6 pl-0 text-accent"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
         >
           <ArrowLeft size={16} className="mr-1" />
           Back
@@ -163,7 +163,8 @@ const CreateGallery = () => {
                           <Textarea 
                             placeholder="Describe your gallery and the artwork it contains" 
                             rows={4}
-                            {...field} 
+                            {...field}
+                            value={field.value !== undefined && field.value !== null ? field.value : ""}
                           />
                         </FormControl>
                         <FormDescription>
@@ -237,7 +238,7 @@ const CreateGallery = () => {
                       <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                         <FormControl>
                           <Checkbox
-                            checked={field.value}
+                            checked={field.value ?? false}
                             onCheckedChange={field.onChange}
                           />
                         </FormControl>
@@ -255,7 +256,7 @@ const CreateGallery = () => {
                     <Button 
                       type="button" 
                       variant="outline"
-                      onClick={() => navigate(-1)}
+                      onClick={() => navigate("/")}
                     >
                       Cancel
                     </Button>

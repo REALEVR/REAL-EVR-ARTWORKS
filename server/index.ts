@@ -57,7 +57,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
     // Serve React app for all other routes (support React Router)
     app.get("*", (_req: Request, res: Response) => {
-      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+      res.sendFile(path.resolve(__dirname, "client", "index.html"));
     });
   }
 

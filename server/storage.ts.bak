@@ -1,7 +1,6 @@
 import { db } from "./db";
 import { collection, doc, getDoc, getDocs, setDoc, addDoc, query, where, updateDoc } from "firebase/firestore";
 import { User, InsertUser, Gallery, InsertGallery, Artwork, InsertArtwork } from "../shared/schema";
-
 export interface IStorage {
   // User operations
   getUser(id: number): Promise<User | undefined>;
@@ -35,16 +34,16 @@ export class DatabaseStorage implements IStorage {
     const snapshot = await getDocs(q);
     return snapshot.empty ? undefined : snapshot.docs[0].data() as User;
   }
-
   async createUser(insertUser: InsertUser): Promise<User> {
     const docRef = await addDoc(collection(db, "users"), insertUser);
     const userDoc = await getDoc(docRef);
     return userDoc.data() as User;
   }
-
+  }
   async getAllUsers(): Promise<User[]> {
     const snapshot = await getDocs(collection(db, "users"));
     return snapshot.docs.map(doc => doc.data() as User);
+  }
   }
 
   async createGallery(insertGallery: InsertGallery): Promise<Gallery> {
@@ -52,34 +51,35 @@ export class DatabaseStorage implements IStorage {
     const galleryDoc = await getDoc(docRef);
     return galleryDoc.data() as Gallery;
   }
-
+  }
   async getGallery(id: number): Promise<Gallery | undefined> {
     const galleryDoc = await getDoc(doc(db, "galleries", id.toString()));
     return galleryDoc.exists() ? galleryDoc.data() as Gallery : undefined;
   }
-
+  }
   async getUserGalleries(userId: number): Promise<Gallery[]> {
     const q = query(collection(db, "galleries"), where("userId", "==", userId));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(doc => doc.data() as Gallery);
   }
-
+  }
   async getAllGalleries(): Promise<Gallery[]> {
     const snapshot = await getDocs(collection(db, "galleries"));
     return snapshot.docs.map(doc => doc.data() as Gallery);
   }
-
+  }
   async getFeaturedGalleries(): Promise<Gallery[]> {
     const q = query(collection(db, "galleries"), where("featured", "==", true));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(doc => doc.data() as Gallery);
   }
-
+  }
   async updateGallery(id: number, galleryUpdate: Partial<InsertGallery>): Promise<Gallery | undefined> {
     const galleryRef = doc(db, "galleries", id.toString());
     await updateDoc(galleryRef, galleryUpdate);
     const galleryDoc = await getDoc(galleryRef);
     return galleryDoc.data() as Gallery;
+  }
   }
 
   async createArtwork(insertArtwork: InsertArtwork): Promise<Artwork> {
@@ -87,22 +87,23 @@ export class DatabaseStorage implements IStorage {
     const artworkDoc = await getDoc(docRef);
     return artworkDoc.data() as Artwork;
   }
-
+  }
   async getArtwork(id: number): Promise<Artwork | undefined> {
     const artworkDoc = await getDoc(doc(db, "artworks", id.toString()));
     return artworkDoc.exists() ? artworkDoc.data() as Artwork : undefined;
   }
-
+  }
   async getGalleryArtworks(galleryId: number): Promise<Artwork[]> {
     const q = query(collection(db, "artworks"), where("galleryId", "==", galleryId));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(doc => doc.data() as Artwork);
   }
-
+  }
   async getUserArtworks(userId: number): Promise<Artwork[]> {
     const q = query(collection(db, "artworks"), where("userId", "==", userId));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(doc => doc.data() as Artwork);
+  }
   }
 }
 
