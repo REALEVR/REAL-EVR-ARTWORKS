@@ -1,3 +1,4 @@
+import express from "express";
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
@@ -46,14 +47,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userData = insertUserSchema.parse(req.body);
       const existingUser = await storage.getUserByUsername(userData.username);
-      
+
       if (existingUser) {
         return res.status(400).json({ message: "Username already exists" });
       }
-      
+
       const user = await storage.createUser(userData);
       const { password, ...userWithoutPassword } = user;
-      
+
       res.status(201).json(userWithoutPassword);
     } catch (error) {
       res.status(400).json({ message: "Invalid user data", error });
@@ -64,11 +65,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { username, password } = req.body;
       const user = await storage.getUserByUsername(username);
-      
+
       if (!user || user.password !== password) {
         return res.status(401).json({ message: "Invalid credentials" });
       }
-      
+
       const { password: _, ...userWithoutPassword } = user;
       res.status(200).json(userWithoutPassword);
     } catch (error) {
@@ -79,7 +80,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/users", async (req: Request, res: Response) => {
     try {
       const users = await storage.getAllUsers();
-      // Remove passwords from the response
       const usersWithoutPasswords = users.map(user => {
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword;
@@ -89,21 +89,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch users", error });
     }
   });
-  
-  // Get a single user by ID
+
   app.get("/api/users/:userId", async (req: Request, res: Response) => {
     try {
       const userId = parseInt(req.params.userId);
       if (isNaN(userId)) {
         return res.status(400).json({ message: "Invalid user ID" });
       }
-      
+
       const user = await storage.getUser(userId);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      
-      // Remove password from response
+
       const { password, ...userWithoutPassword } = user;
       res.status(200).json(userWithoutPassword);
     } catch (error) {
@@ -114,7 +112,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Galleries
   app.post("/api/galleries", upload.single("coverImage"), async (req: Request, res: Response) => {
     try {
-      // Convert FormData strings to proper types before validation
       const galleryData = {
         title: req.body.title,
         description: req.body.description || null,
@@ -122,15 +119,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         featured: req.body.featured === 'true' || req.body.featured === true,
         coverImage: req.file ? `/uploads/${req.file.filename}` : null,
       };
-      
-      console.log('Processing gallery data:', galleryData);
-      
+
       const validatedData = insertGallerySchema.parse(galleryData);
       const gallery = await storage.createGallery(validatedData);
-      
+
       res.status(201).json(gallery);
     } catch (error) {
-      console.error('Gallery creation error:', error);
       const errorMessage = typeof error === "object" && error !== null && "message" in error ? (error as { message: string }).message : String(error);
       res.status(400).json({ message: "Invalid gallery data", error: errorMessage });
     }
@@ -157,11 +151,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/galleries/:id", async (req: Request, res: Response) => {
     try {
       const gallery = await storage.getGallery(parseInt(req.params.id));
-      
+
       if (!gallery) {
         return res.status(404).json({ message: "Gallery not found" });
       }
-      
+
       res.status(200).json(gallery);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch gallery", error });
@@ -181,16 +175,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/artworks", upload.single("image"), async (req: Request, res: Response) => {
     try {
       let artworkData = req.body;
-      
+
       if (req.file && req.file.filename) {
         artworkData.imageUrl = `/uploads/${req.file.filename}`;
       } else {
         return res.status(400).json({ message: "Image file is required" });
       }
-      
+
       const validatedData = insertArtworkSchema.parse(artworkData);
       const artwork = await storage.createArtwork(validatedData);
-      
+
       res.status(201).json(artwork);
     } catch (error) {
       res.status(400).json({ message: "Invalid artwork data", error });
@@ -200,11 +194,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/artworks/:id", async (req: Request, res: Response) => {
     try {
       const artwork = await storage.getArtwork(parseInt(req.params.id));
-      
+
       if (!artwork) {
         return res.status(404).json({ message: "Artwork not found" });
       }
-      
+
       res.status(200).json(artwork);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch artwork", error });
@@ -232,5 +226,3 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
   return httpServer;
 }
-
-import express from "express";

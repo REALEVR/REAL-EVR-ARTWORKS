@@ -61,7 +61,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     });
   }
 
-  const port = Number(process.env.PORT) || 5000;
+  const port = Number(process.env.PORT) || 3333;
   const host = "0.0.0.0";
 
   server.listen(port, host, () => {
