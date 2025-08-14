@@ -1,5 +1,4 @@
-import express from "express";
-import type { Express, Request, Response } from "express";
+import express, { type Express, type Request, type Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertGallerySchema, insertArtworkSchema } from "@shared/schema";
@@ -41,8 +40,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Serve uploaded files
   app.use("/uploads", express.static(uploadDir));
 
-  // API Routes
-  // Users
+  // ====================
+  // USERS
+  // ====================
   app.post("/api/users/register", async (req: Request, res: Response) => {
     try {
       const userData = insertUserSchema.parse(req.body);
@@ -54,7 +54,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const user = await storage.createUser(userData);
       const { password, ...userWithoutPassword } = user;
-
       res.status(201).json(userWithoutPassword);
     } catch (error) {
       res.status(400).json({ message: "Invalid user data", error });
@@ -109,23 +108,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Galleries
+  // ====================
+  // GALLERIES
+  // ====================
   app.post("/api/galleries", upload.single("coverImage"), async (req: Request, res: Response) => {
     try {
       const galleryData = {
         title: req.body.title,
         description: req.body.description || null,
         userId: parseInt(req.body.userId, 10),
-        featured: req.body.featured === 'true' || req.body.featured === true,
+        featured: req.body.featured === "true" || req.body.featured === true,
         coverImage: req.file ? `/uploads/${req.file.filename}` : null,
       };
+
+      console.log("Processing gallery data:", galleryData);
 
       const validatedData = insertGallerySchema.parse(galleryData);
       const gallery = await storage.createGallery(validatedData);
 
       res.status(201).json(gallery);
     } catch (error) {
-      const errorMessage = typeof error === "object" && error !== null && "message" in error ? (error as { message: string }).message : String(error);
+      console.error("Gallery creation error:", error);
+      const errorMessage =
+        typeof error === "object" && error !== null && "message" in error
+          ? (error as { message: string }).message
+          : String(error);
       res.status(400).json({ message: "Invalid gallery data", error: errorMessage });
     }
   });
@@ -171,7 +178,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Artworks
+  // ====================
+  // ARTWORKS
+  // ====================
   app.post("/api/artworks", upload.single("image"), async (req: Request, res: Response) => {
     try {
       let artworkData = req.body;
