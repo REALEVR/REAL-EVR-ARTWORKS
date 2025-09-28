@@ -4,17 +4,10 @@ from sqlalchemy.orm import sessionmaker
 from models import Base
 
 # Database configuration
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    # For development, use SQLite if no PostgreSQL URL is provided
-    DATABASE_URL = "sqlite:///./realevr.db"
+DATABASE_URL = "postgresql://real_evr_artworks_user:vp64GoZgTEyFlPjAmKUN4KURQxoJYIll@dpg-d3cip1qli9vc73djqdbg-a.oregon-postgres.render.com/real_evr_artworks"
 
-# Create engine with SSL mode for Supabase
-if DATABASE_URL.startswith("postgresql://"):
-    # Add SSL settings for Supabase connection
-    engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
-else:
-    engine = create_engine(DATABASE_URL)
+# Create engine with SSL mode for PostgreSQL connection
+engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
 
 # Create session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

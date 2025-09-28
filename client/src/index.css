@@ -6,29 +6,29 @@
   :root {
     /* Set custom fonts */
     font-family: 'Inter', sans-serif;
+
+    /* Base colors - Professional charcoal black theme */
+    --background: 0 0% 12%;
+    --foreground: 0 0% 98%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
+    --popover: 0 0% 16%;
+    --popover-foreground: 0 0% 98%;
+    --card: 0 0% 16%;
+    --card-foreground: 0 0% 98%;
+    --border: 0 0% 22%;
+    --input: 0 0% 18%;
     
-    /* Base colors */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    
-    /* Theme colors */
-    --primary: 210 100% 57%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 0 0% 96.9%;
-    --secondary-foreground: 20 14.3% 4.1%;
-    --accent: 210 100% 57%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --ring: 210 100% 57%;
+    /* Theme colors - Professional palette */
+    --primary: 210 100% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 25%;
+    --secondary-foreground: 0 0% 85%;
+    --accent: 45 100% 65%;
+    --accent-foreground: 0 0% 15%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 210 100% 60%;
     
     /* UI */
     --radius: 0.5rem;
@@ -40,37 +40,38 @@
     --chart-4: 300 100% 70%;
     --chart-5: 60 100% 70%;
     
-    /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222.2 84% 4.9%;
-    --sidebar-primary: 210 100% 57%;
-    --sidebar-primary-foreground: 222.2 84% 4.9%;
-    --sidebar-accent: 210 100% 57%;
-    --sidebar-accent-foreground: 222.2 84% 4.9%;
-    --sidebar-border: 20 5.9% 90%;
-    --sidebar-ring: 210 100% 57%;
+    /* Sidebar - Charcoal black theme */
+    --sidebar-background: 0 0% 12%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 0% 85%;
+    --sidebar-primary-foreground: 0 0% 15%;
+    --sidebar-accent: 0 0% 75%;
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 0 0% 25%;
+    --sidebar-ring: 0 0% 75%;
   }
   
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%; 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --primary: 210 100% 57%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --accent: 210 100% 57%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 30.6%;
+    /* Dark theme - Professional consistency */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --primary: 210 100% 65%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 90%;
+    --accent: 45 100% 70%;
+    --accent-foreground: 0 0% 8%;
+    --destructive: 0 75% 60%;
     --destructive-foreground: 0 0% 98%;
-    --ring: 212.7 26.8% 83.9;
+    --ring: 210 100% 65%;
   }
 }
 
@@ -80,7 +81,7 @@
   }
   
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased dark-textured-bg;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -116,7 +117,7 @@
 
 .artwork-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 /* Animation classes */
@@ -131,4 +132,179 @@
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+/* Enhanced animations for professional look */
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* Text shadow utility */
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Glass morphism effect - Updated for charcoal black theme */
+.glass {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Two-color button system for charcoal black theme */
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background: hsl(var(--primary-foreground));
+  color: hsl(var(--primary));
+}
+
+.btn-secondary {
+  background: transparent;
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary));
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-accent {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border: 1px solid hsl(var(--accent));
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  background: hsl(var(--accent-foreground));
+  color: hsl(var(--accent));
+}
+
+/* Legacy support - redirect old btn-primary to new system */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Professional card styling - Updated for charcoal black theme */
+.professional-card {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 1px solid hsl(var(--border));
+}
+
+.professional-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  border-color: hsl(var(--accent));
+}
+
+/* Gradient text effect - Updated for charcoal black theme */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Dark textured background for entire website - Optimized for charcoal black */
+.dark-textured-bg {
+  background:
+    radial-gradient(circle at 30% 70%, rgba(40, 40, 50, 0.12) 0%, transparent 30%),
+    radial-gradient(circle at 70% 30%, rgba(50, 40, 45, 0.10) 0%, transparent 30%),
+    radial-gradient(circle at 50% 50%, rgba(35, 35, 40, 0.08) 0%, transparent 40%),
+    linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 25%, #1a1a1a 50%, #0f0f0f 75%, #1a1a1a 100%);
+  background-attachment: fixed;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  position: relative;
+}
+
+.dark-textured-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2a2a2a 0%, #3d3d3d 30%, #2a2a2a 60%, #3d3d3d 100%);
+  background-size: 200% 100%;
+  animation: gradientShift 6s ease infinite;
+  z-index: 50;
 }

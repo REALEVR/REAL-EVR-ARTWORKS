@@ -90,6 +90,7 @@ function Router() {
       {/* Public Routes - Accessible without login */}
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
+      <Route path="/contact" component={contact_us} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/explore" component={Explore} />

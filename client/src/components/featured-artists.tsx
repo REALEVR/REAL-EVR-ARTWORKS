@@ -40,10 +40,10 @@ export default function FeaturedArtists() {
   const featuredArtists = processedArtists;
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-card">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-baseline mb-8">
-          <h2 className="font-serif text-3xl font-bold">Featured Artists</h2>
+          <h2 className="font-serif text-3xl font-bold text-foreground">Featured Artists</h2>
           <Link href="/artists" className="font-medium text-sm text-accent hover:underline">View all</Link>
         </div>
         
@@ -74,9 +74,9 @@ export default function FeaturedArtists() {
                       <span className="font-medium text-sm">View Profile</span>
                     </div>
                   </div>
-                  <h3 className="font-serif text-lg font-semibold">{artist.name}</h3>
-                  <p className="text-sm text-gray-600">{artist.artType}</p>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <h3 className="font-serif text-lg font-semibold text-foreground">{artist.name}</h3>
+                  <p className="text-sm text-muted-foreground">{artist.artType}</p>
+                  <p className="text-sm text-muted-foreground mt-1">
                     {artist.artworksCount} Artworks · {artist.galleriesCount} Galleries
                   </p>
                 </Link>
